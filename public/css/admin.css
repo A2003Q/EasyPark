@@ -1,0 +1,165 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #F9FAFB;
+}
+
+.admin-wrapper {
+    display: flex;
+}
+
+.sidebar {
+    width: 240px;
+    background: #1E3A8A;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.sidebar a {
+    color: white;
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+}
+.admin-table > thead > tr > th {
+    background: linear-gradient(180deg, #1f1f2e, #3a3a5e) !important;
+    color: white !important;
+    border: none;
+}
+.admin-title {
+    font-weight: 700;
+    color: #1f1f2e;
+    letter-spacing: 0.5px;
+}
+
+
+
+
+.content {
+    padding: 30px;
+    width: 100%;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+.pagination-wrapper nav {
+    display: flex;
+    justify-content: left;
+    gap: 5px;
+    font-size: 12px; /* smaller text */
+}
+
+.pagination-wrapper a,
+.pagination-wrapper span {
+    padding: 2px 6px; /* smaller buttons */
+    border: 3px solid #ddd;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #3a3a5e;
+   
+}
+
+.pagination-wrapper .current {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination-wrapper a:hover {
+    background-color: #eee;
+}
+.dashboard-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    align-items: stretch; /* Make all cards equal height */
+}
+
+.dashboard-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 180px; /* fixed height for uniformity */
+}
+
+html, body { height: 100%; margin:0; font-family: 'Nunito', sans-serif; }
+#wrapper { display: flex; min-height: 100vh; align-items: stretch; }
+
+        /* Sidebar */
+        .sidebar { min-width: 250px; max-width: 250px; background: linear-gradient(180deg, #1f1f2e, #3a3a5e); color: white; display: flex; flex-direction: column; transition: 0.3s; box-shadow: 2px 0 12px rgba(0,0,0,0.2); }
+        .sidebar .sidebar-brand { padding: 1.5rem; font-size: 1.5rem; font-weight: 700; text-align:center; background-color: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .sidebar a { color: #f0f0f5; text-decoration:none; display:flex; align-items:center; padding:0.9rem 1.5rem; font-size:1rem; border-radius:8px; margin:0.3rem 0; transition:0.3s; }
+        .sidebar a i { margin-right: 10px; font-size:1.2rem; }
+        .sidebar a:hover { background-color:#5a5a7a; transform: translateX(5px); }
+        .sidebar .nav-item.active a { background-color:#7a78a0; font-weight:600; }
+        .sidebar hr { border-color: rgba(255,255,255,0.2); margin:1rem 0; }
+
+        /* Content */
+        #content { flex-grow:1; padding:2rem; background-color:#f8f7fa; transition: all 0.3s ease; }
+
+        /* Cards */
+        .dashboard-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+
+    /* Make all cards equal height */
+    align-items: stretch;
+}
+        .dashboard-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(180deg,#1f1f2e,#3a3a5e);
+    color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    width: 45%; 
+    min-width: 250px;
+
+    /* Force all cards to be equal height */
+    height: 180px; /* or use flex-grow: 1; for automatic equal height */
+}
+        .dashboard-card:hover { transform:translateY(-6px); box-shadow:0 15px 35px #3a3a5e; }
+        .dashboard-card i { font-size:40px; margin-bottom:15px; }
+        .dashboard-card h4 { font-size:22px; margin-bottom:10px; }
+        .dashboard-card p { font-size:28px; font-weight:bold; margin:0; }
+
+        /* Responsive */
+        @media(max-width:768px){ .sidebar { min-width:200px; max-width:200px; } .dashboard-card{width:100%;} }
+  
+
+/* Dashboard Charts */
+.dashboard-charts {
+    margin-top: 40px;
+}
+
+.chart-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.chart-title {
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1f1f2e;
+    text-align: center;
+}
+
+
