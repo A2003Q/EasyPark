@@ -19,7 +19,10 @@ class UserProfileController extends Controller
             ->paginate(10);
 
         $now = Carbon::now();
-         $subscription = $user->subscriptions()
+
+        $subscription = $user->subscriptions()
+        ->where('status','active')
+        ->where('end_date','>=', now())
         ->latest()
         ->first();
 

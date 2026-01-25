@@ -170,24 +170,72 @@
         </div>
 
         
-        <div id="tab-sub" class="box p-4 profile-tab">
-          <div class="tab-title mb-3">My Subscription</div>
+<div id="tab-sub" class="box p-4 profile-tab">
+  <div class="tab-title mb-3">My Subscription</div>
 
-          <?php if($subscription): ?>
-            <div class="p-3" style="background:#f4f4f8;border-radius:14px;">
-              <div class="fw-bold" style="color:#3a3a5e;">
-                Plan: <?php echo e(strtoupper($subscription->type)); ?>
+  <?php if($subscription): ?>
+    <div class="p-3" style="background:#f4f4f8;border-radius:14px;">
 
-              </div>
-              <div class="muted" style="font-size:13px;">
-                Ends: <b><?php echo e($subscription->ends_at); ?></b>
-              </div>
-            </div>
-          <?php else: ?>
-            <div class="muted mb-3">No active subscription.</div>
-            <a href="/subscriptions" class="btn pe-btn w-100">Subscribe now</a>
-          <?php endif; ?>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="muted">Plan</div>
+          <div class="fw-bold" style="color:#3a3a5e;"><?php echo e(strtoupper($subscription->plan)); ?></div>
         </div>
+
+        <div class="col-md-6">
+          <div class="muted">Status</div>
+          <div class="fw-bold" style="color:#3a3a5e;"><?php echo e(strtoupper($subscription->status)); ?></div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="muted">Price</div>
+          <div class="fw-bold" style="color:#3a3a5e;"><?php echo e($subscription->price); ?> JOD</div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="muted">Hours Limit</div>
+          <div class="fw-bold" style="color:#3a3a5e;"><?php echo e($subscription->hours_limit); ?></div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="muted">Hours Used</div>
+          <div class="fw-bold" style="color:#3a3a5e;"><?php echo e($subscription->hours_used); ?></div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="muted">Days Limit</div>
+          <div class="fw-bold" style="color:#3a3a5e;"><?php echo e($subscription->days_limit); ?></div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="muted">Days Used</div>
+          <div class="fw-bold" style="color:#3a3a5e;"><?php echo e($subscription->days_used); ?></div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="muted">Start Date</div>
+          <div class="fw-bold" style="color:#3a3a5e;">
+            <?php echo e(\Carbon\Carbon::parse($subscription->start_date)->format('Y-m-d')); ?>
+
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="muted">End Date</div>
+          <div class="fw-bold" style="color:#3a3a5e;">
+            <?php echo e(\Carbon\Carbon::parse($subscription->end_date)->format('Y-m-d')); ?>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  <?php else: ?>
+    <div class="muted mb-3">No active subscription.</div>
+    <a href="/subscriptions" class="btn pe-btn w-100">Subscribe now</a>
+  <?php endif; ?>
+</div>
+
 
       </div>
     </div>

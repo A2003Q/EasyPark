@@ -76,7 +76,7 @@ class SubscriptionFrontController extends Controller
             // basic ما يسمح days
             if ($unit === 'days' && $subscription->plan === 'basic') {
                 $request->session()->forget('pending_reservation');
-                return redirect($request->session()->get('url.intended', route('user.parkings.index')))
+                return redirect($request->session()->get('url.intended', route('user.parkings.show')))
                     ->with('error','Basic plan supports hourly reservations only.');
             }
 
@@ -85,12 +85,12 @@ class SubscriptionFrontController extends Controller
 
             if ($unit === 'hours' && $value > $remainingHours) {
                 $request->session()->forget('pending_reservation');
-                return redirect($request->session()->get('url.intended', route('user.parkings.index')))
+                return redirect($request->session()->get('url.intended', route('user.parkings.show')))
                     ->with('error', "Not enough hours left. Remaining: {$remainingHours}");
             }
             if ($unit === 'days' && $value > $remainingDays) {
                 $request->session()->forget('pending_reservation');
-                return redirect($request->session()->get('url.intended', route('user.parkings.index')))
+                return redirect($request->session()->get('url.intended', route('user.parkings.show')))
                     ->with('error', "Not enough days left. Remaining: {$remainingDays}");
             }
 
