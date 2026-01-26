@@ -4,6 +4,16 @@
         <h2 class="text-center mb-4">Edit Parking</h2>
     </div>
 
+    <?php if($errors->any()): ?>
+      <div class="alert alert-danger" style="margin: 0 auto 15px; max-width:600px;">
+        <ul style="margin:0; padding-left:18px;">
+          <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <li><?php echo e($error); ?></li>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </ul>
+      </div>
+    <?php endif; ?>
+
     <div class="card admin-card" style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); padding: 30px;">
         <form method="POST" action="<?php echo e(route('admin.parkings.update', $parking)); ?>">
             <?php echo csrf_field(); ?>
@@ -65,8 +75,18 @@
             </div>
 
             <div class="form-group mb-4">
+                <label for="image_url" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">Image URL</label>
+                <input type="url" id="image_url" name="image_url"
+                       value="<?php echo e(old('image_url', $parking->image_url)); ?>"
+                       placeholder="https://example.com/parking.jpg"
+                       style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
+            </div>
+
+            <div class="form-group mb-4">
+                <input type="hidden" name="is_active" value="0">
                 <label style="display: flex; align-items: center; font-weight: 600; color: #333;">
-                    <input type="checkbox" name="is_active" <?php echo e(old('is_active', $parking->is_active) ? 'checked' : ''); ?>
+                    <input type="checkbox" name="is_active" value="1"
+                           <?php echo e(old('is_active', $parking->is_active) ? 'checked' : ''); ?>
 
                            style="margin-right: 10px; width: 18px; height: 18px;">
                     Active
@@ -74,7 +94,7 @@
             </div>
 
             <div class="form-actions text-end">
-                <button type="submit" 
+                <button type="submit"
                         style="background: linear-gradient(180deg, #1f1f2e, #3a3a5e); color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
                     Update Parking
                 </button>

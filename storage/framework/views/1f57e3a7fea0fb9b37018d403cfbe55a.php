@@ -1,6 +1,6 @@
 <header class="header_section" id="top">
   <div class="container">
-    <nav class="navbar navbar-expand-lg custom_nav-container" >
+    <nav class="navbar navbar-expand-lg custom_nav-container">
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class=""></span>
@@ -12,27 +12,29 @@
             <a class="nav-link" style="color: #3a3a5e" href="<?php echo e(route('user.parkings.index')); ?>">Parkings</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link"style="color: #3a3a5e" href="<?php echo e(route('user.subscriptions.index')); ?>">Subscriptions</a>
+            <a class="nav-link" style="color: #3a3a5e" href="<?php echo e(route('user.subscriptions.index')); ?>">Subscriptions</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link navbar-brand" style="color: #3a3a5e" href="<?php echo e(route('home')); ?>#top">
-              <span>EasyPark</span>
+          
+          <!-- Logo in Center -->
+          <li class="nav-item nav-logo-item">
+            <a class="nav-link navbar-brand" href="<?php echo e(route('home')); ?>#top">
+              <img src="<?php echo e(asset('landing/images/logo2.png')); ?>" alt="ParkIt Logo" class="nav-logo">
             </a>
           </li>
 
           <?php if(auth()->guard()->check()): ?>
             <li class="nav-item">
-              <a class="nav-link"style="color: #3a3a5e" href="<?php echo e(route('user.profile')); ?>">Profile</a>
+              <a class="nav-link" style="color: #3a3a5e" href="<?php echo e(route('user.profile')); ?>">Profile</a>
             </li>
-            <li class="nav-item" style="color: #3a3a5e">
+            <li class="nav-item">
               <form method="POST" action="<?php echo e(route('logout')); ?>" style="display:inline;">
                 <?php echo csrf_field(); ?>
-                <button type="submit" class="nav-link"  style="background:none;border:0;" style="color: #3a3a5e">Logout</button>
+                <button type="submit" class="nav-link logout-link" style="color: #3a3a5e">Logout</button>
               </form>
             </li>
           <?php else: ?>
-            <li class="nav-item" style="color: #3a3a5e">
-              <a class="nav-link" href="<?php echo e(route('login')); ?>">Sign in</a>
+            <li class="nav-item">
+              <a class="nav-link" style="color: #3a3a5e" href="<?php echo e(route('login')); ?>">Sign in</a>
             </li>
           <?php endif; ?>
         </ul>

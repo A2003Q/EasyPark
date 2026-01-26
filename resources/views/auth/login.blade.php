@@ -117,8 +117,10 @@
       <div class="col-md-6 col-lg-5">
         <div class="auth_card">
           <div class="auth_brand text-center">
-            <a href="{{ route('home') }}#top" class="auth_logo"><span>EasyPark</span></a>
-            <p class="auth_subtitle text-center">Sign in to continue</p>
+               <a class="nav-link navbar-brand" href="#top"style="margin-bottom:0;padding-bottom:0;">
+                            <img src="{{ asset('landing/images/logo2.png') }}" alt="ParkIt Logo" class="nav-logo"style="margin-bottom:0;">
+                        </a>
+            <p class="auth_subtitle text-center" style="margin-top:0;">Sign in to continue</p>
           </div>
 
           @if (session('status'))

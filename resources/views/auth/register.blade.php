@@ -67,6 +67,8 @@
     margin: 0 0 16px 0 !important;
     float: none !important;
   }
+
+
   </style>
 </head>
 <body class="auth_page">
@@ -77,10 +79,12 @@
     <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
       <div class="col-md-6 col-lg-5">
         <div class="auth_card">
-          <div class="auth_brand text-center">
-            <a href="{{ route('home') }}#top" class="auth_logo"><span>EasyPark</span></a>
-            <p class="auth_subtitle text-center">Create your account</p>
-          </div>
+         <div class="auth_brand text-center">
+    <a class="nav-link navbar-brand" href="#top" style="margin-bottom:0;padding-bottom:0;">
+        <img src="{{ asset('landing/images/logo2.png') }}" alt="ParkIt Logo" class="nav-logo" style="margin-bottom:0;">
+    </a>
+    <p class="auth_subtitle text-center" style="margin-top:0;">Create your account</p>
+</div>
 
           @if ($errors->any())
             <div class="alert alert-danger" role="alert">

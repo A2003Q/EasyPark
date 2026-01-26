@@ -220,96 +220,284 @@ button {
     background-size: 100%;
 }
 
+/* ===================================== */
+/* User Pages Navbar - Works for Guest & Signed In */
+/* ===================================== */
+
 .custom_nav-container {
-        background-color: #fff;
-        padding: 0;
-        margin: 15px 0;
-    }
+    background-color: #fff;
+    padding: 12px 0;
+    margin: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    border-radius: 12px;
+}
 
-    #navbarSupportedContent .navbar-nav {
-        width: 100%;
-        display: flex;
-    }
+#navbarSupportedContent .navbar-nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-wrap: nowrap; /* ما يلف */
+}
 
- #navbarSupportedContent .nav-item:not(.nav-logo-item){
+#navbarSupportedContent .nav-item:not(.nav-logo-item) {
     flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
+    min-width: 0; /* يسمح للـ items تنضغط */
 }
-.nav-logo-item{
+
+.nav-logo-item {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    flex: none !important;     /* 🔥 لا ياخد flex */
-    z-index: 10;               /* 🔥 يطلع فوق الكل */
-}
-.nav-logo{
-    width: 70px;   /* كبّري براحتك */
-    height: auto;
-}
-
-.brand-text{
-    font-size: 26px;
-    font-weight: 700;
-    color: #1b1b1b;
+    flex: none !important;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
-    #navbarSupportedContent .nav-link {
-        text-align: center;
-   
-        color: #3a3a5e;
-    }
-    #navbarSupportedContent .nav-link,
+.nav-logo {
+    height: 170px; /* حجم صغير يناسب كل الحالات */
+    width: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+.nav-logo:hover {
+    transform: scale(1.08);
+}
+
+#navbarSupportedContent .nav-link {
+    text-align: center;
+    color: #3a3a5e;
+    font-weight: 600;
+    padding: 10px 14px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+#navbarSupportedContent .nav-link:hover {
+    color: #87CEEB;
+    background: rgba(135, 206, 235, 0.1);
+}
+
+#navbarSupportedContent .nav-link.navbar-brand {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background: none !important;
+}
+
 .logout-link {
-    line-height: 2;
-    padding: 0.5rem 0;
-    display: inline-block;
-}
-.logout-link{
     background: none;
     border: none;
     font: inherit;
-    color: inherit;
+    color: #3a3a5e;
     cursor: pointer;
+    font-weight: 600;
+    padding: 10px 14px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
 }
 
+.logout-link:hover {
+    color: #87CEEB;
+    background: rgba(135, 206, 235, 0.1);
+}
 
-    #navbarSupportedContent .nav-link.navbar-brand {
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        text-transform: none;
-        font-weight: bold;
+/* Responsive */
+@media (max-width: 991px) {
+    .nav-logo-item {
         position: relative;
-    }
-
-    #navbarSupportedContent .nav-link.navbar-brand span {
-        z-index: 2;
-        color: #ddd;
-    }
-
-    #navbarSupportedContent .nav-link.navbar-brand span span {
-        color: white;
-    }
-
-    #navbarSupportedContent .nav-link.navbar-brand::before {
-        content: "";
-        position: absolute;
-        left: 0;
+        left: auto;
+        transform: none;
         top: 0;
-        width: 100%;
-        height: 100%;
-      
-        transform: scale(1.25);
-        border-radius: 5px;
     }
-    .brand-combo{
+    
+    #navbarSupportedContent .navbar-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #navbarSupportedContent .nav-item {
+        width: 100%;
+    }
+    
+    .nav-logo {
+        height: 50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-logo {
+        height: 45px;
+    }
+    
+    .custom_nav-container {
+        margin: 10px 0;
+        padding: 10px 0;
+    }
+    
+    #navbarSupportedContent .nav-link,
+    .logout-link {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+}
+/* ===================================== */
+/* Landing Page Navbar - Works for Guest & Signed In */
+/* ===================================== */
+
+.landing-header {
+    margin-bottom: 20px;
+}
+
+.landing-nav.custom_nav-container {
+    background-color: #fff;
+    padding: 12px 0;
+    margin: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    border-radius: 12px;
+}
+
+.landing-header #navbarSupportedContent .navbar-nav {
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 8px;
+    position: relative;
+    flex-wrap: nowrap; /* ما يلف */
 }
 
+.landing-header #navbarSupportedContent .nav-item:not(.nav-logo-item) {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 0; /* يسمح للـ items تنضغط */
+}
 
+.landing-header .nav-logo-item {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    flex: none !important;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.landing-header .nav-logo {
+    height: 55px; /* حجم صغير يناسب كل الحالات */
+    width: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+.landing-header .nav-logo:hover {
+    transform: scale(1.08);
+}
+
+.landing-header #navbarSupportedContent .nav-link {
+    text-align: center;
+    color: #3a3a5e;
+    font-weight: 600;
+    padding: 10px 14px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.landing-header #navbarSupportedContent .nav-link:hover {
+    color: #87CEEB;
+    background: rgba(135, 206, 235, 0.1);
+}
+
+.landing-header #navbarSupportedContent .nav-link.navbar-brand {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background: none !important;
+}
+
+.landing-header .logout-link {
+    background: none;
+    border: none;
+    font: inherit;
+    color: #3a3a5e;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 10px 14px;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.landing-header .logout-link:hover {
+    color: #87CEEB;
+    background: rgba(135, 206, 235, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .landing-header .nav-logo-item {
+        position: relative;
+        left: auto;
+        transform: none;
+        top: 0;
+    }
+    
+    .landing-header #navbarSupportedContent .navbar-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .landing-header #navbarSupportedContent .nav-item {
+        width: 100%;
+    }
+    
+    .landing-header .nav-logo {
+        height: 50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .landing-header .nav-logo {
+        height: 45px;
+    }
+    
+    .landing-nav.custom_nav-container {
+        margin: 10px 0;
+        padding: 10px 0;
+    }
+    
+    .landing-header #navbarSupportedContent .nav-link,
+    .landing-header .logout-link {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+}
 
 
 /* header section end */
