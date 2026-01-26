@@ -23,9 +23,33 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#testimonials">Reviews</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                        </li>
+                       {{-- إذا المستخدم مش مسجّل دخول --}}
+@guest
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('login') }}">Sign In</a>
+</li>
+@endguest
+
+{{-- إذا المستخدم مسجّل دخول --}}
+@auth
+
+    {{-- إذا Admin --}}
+    @if(auth()->user()->role === 'admin')
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+        </li>
+    @else
+        {{-- User عادي --}}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('user.profile') }}">Profile</a>
+        </li>
+    @endif
+
+ {{-- Logout --}} <li class="nav-item"> <form action="{{ route('logout') }}" method="POST" class="nav-link p-0 m-0"> @csrf <button type="submit" class="logout-link"> Logout </button> </form>
+    </li>
+
+@endauth
+
                         <li class="nav-item">
                             <a class="nav-link" href="#footer">Contact</a>
                         </li>

@@ -1,22 +1,20 @@
-@extends('admin.layout')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="admin-page">
     <div class="page-header">
         <h2 class="text-center mb-4">Add New Parking</h2>
     </div>
 
     <div class="card admin-card" style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); padding: 30px;">
-        <form method="POST" action="{{ route('admin.parkings.store') }}">
-            @csrf
+        <form method="POST" action="<?php echo e(route('admin.parkings.store')); ?>">
+            <?php echo csrf_field(); ?>
 
             <div class="form-group mb-4">
                 <label for="city_id" style="display: block; margin-bottom: 8px; font-weight: 600; color: #333;">City</label>
                 <select name="city_id" id="city_id" required
                         style="width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;">
-                    @foreach($cities as $city)
-                        <option value="{{ $city->id }}">{{ $city->name }}</option>
-                    @endforeach
+                    <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <option value="<?php echo e($city->id); ?>"><?php echo e($city->name); ?></option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
             </div>
 
@@ -92,4 +90,6 @@
         </form>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\DELL\Downloads\Parking-Finder2-stage4-auth-flow\resources\views/admin/parkings/create.blade.php ENDPATH**/ ?>

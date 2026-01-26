@@ -23,9 +23,33 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#testimonials">Reviews</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo e(route('admin.dashboard')); ?>">Dashboard</a>
-                        </li>
+                       
+<?php if(auth()->guard()->guest()): ?>
+<li class="nav-item">
+    <a class="nav-link" href="<?php echo e(route('login')); ?>">Sign In</a>
+</li>
+<?php endif; ?>
+
+
+<?php if(auth()->guard()->check()): ?>
+
+    
+    <?php if(auth()->user()->role === 'admin'): ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(route('admin.dashboard')); ?>">Dashboard</a>
+        </li>
+    <?php else: ?>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(route('user.profile')); ?>">Profile</a>
+        </li>
+    <?php endif; ?>
+
+  <li class="nav-item"> <form action="<?php echo e(route('logout')); ?>" method="POST" class="nav-link p-0 m-0"> <?php echo csrf_field(); ?> <button type="submit" class="logout-link"> Logout </button> </form>
+    </li>
+
+<?php endif; ?>
+
                         <li class="nav-item">
                             <a class="nav-link" href="#footer">Contact</a>
                         </li>

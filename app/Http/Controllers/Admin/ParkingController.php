@@ -48,8 +48,8 @@ class ParkingController extends Controller
         'total_spots' => 'required|integer|min:1',
         'available_spots' => 'required|integer|min:0',
         'price_per_hour' => 'required|numeric|min:0',
-        'image_url' => 'nullable|string|max:500',
-        'is_active' => 'required|boolean',
+        'image_url' => 'required|string|max:500',
+        'is_active' => 'nullable',
     ]);
 
     Parking::create([
@@ -61,6 +61,7 @@ class ParkingController extends Controller
         'total_spots' => $request->total_spots,
         'available_spots' => $request->available_spots,
         'price_per_hour' => $request->price_per_hour,
+        'image_url' => $request->image_url,
         'is_active' => $request->has('is_active'),
     ]);
 

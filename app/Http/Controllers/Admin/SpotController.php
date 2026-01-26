@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Spot;
 use Illuminate\Http\Request;
+use App\Models\Parking;
 
 class SpotController extends Controller
 {
@@ -38,4 +39,11 @@ class SpotController extends Controller
         $spot->delete();
         return back()->with('success', 'Spot deleted.');
     }
+
+    public function index(Parking $parking)
+{
+    return response()->json(
+        $parking->spots()->orderBy('spot_number')->get()
+    );
+}
 }

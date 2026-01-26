@@ -39,55 +39,58 @@
          <div class="container-fluid">
             <div class="row">
                <div class="col-md-12">
-                  <div id="banner_slider" class="carousel slide" data-ride="carousel">
-                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                           <div class="banner_taital_main">
-                              <h1 class="banner_taital">Find<br> Parking Spots</h1>
-                              <p class="banner_text">A smart-city parking finder that shows available outdoor spots near you, with clear status and location guidance.</p>
-                              <form class="form-group pe-hero-search" method="GET" action="{{ url('/parkings') }}">
-                                 <input type="text" class="update_mail pe-search-input" placeholder="Search area (e.g., Downtown, Amman)" name="place">
-                                 <div class="subscribe_bt">
-                                    <button type="submit" class="pe-search-btn"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-                                 </div>
-                              </form>
-                           </div>
-                        </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="banner_taital_main">
-                              <h1 class="banner_taital">Park<br> Faster</h1>
-                              <p class="banner_text">See free spots in real time, navigate to the closest area, and save your car location with one tap.</p>
-                              <form class="form-group pe-hero-search" method="GET" action="{{ url('/parkings') }}">
-                                 <input type="text" class="update_mail pe-search-input" placeholder="Search by street / landmark" name="place">
-                                 <div class="subscribe_bt">
-                                    <button type="submit" class="pe-search-btn"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-                                 </div>
-                              </form>
-                           </div>
-                        </div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="banner_taital_main">
-                              <h1 class="banner_taital">Smart<br> City Ready</h1>
-                              <p class="banner_text">Designed for outdoor parking lots and streets—simple for drivers, powerful for operators, scalable for cities.</p>
-                              <form class="form-group pe-hero-search" method="GET" action="{{ url('/parkings') }}">
-                                 <input type="text" class="update_mail pe-search-input" placeholder="Search parking zone" name="place">
-                                 <div class="subscribe_bt">
-                                    <button type="submit" class="pe-search-btn"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
-                                 </div>
-                              </form>
-                           </div>
-                        </div>
-                        </div>
-                     </div>
-                     <a class="carousel-control-prev" href="#banner_slider" role="button" data-slide="prev">
-                     <i class="fa fa-angle-left"></i>
-                     </a>
-                     <a class="carousel-control-next" href="#banner_slider" role="button" data-slide="next">
-                     <i class="fa fa-angle-right"></i>
-                     </a>
-                  </div>
+                 <div id="banner_slider" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <div class="banner_taital_main">
+        <h1 class="banner_taital">Find<br> Parking Spots</h1>
+        <p class="banner_text">A smart-city parking finder that shows available outdoor spots near you, with clear status and location guidance.</p>
+        <form class="form-group pe-hero-search" method="GET" action="{{ url('/parkings') }}">
+          <input type="text" class="update_mail pe-search-input" placeholder="Search area (e.g., Downtown, Amman)" name="place">
+          <div class="subscribe_bt">
+            <button type="submit" class="pe-search-btn"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <div class="banner_taital_main">
+        <h1 class="banner_taital">Park<br> Faster</h1>
+        <p class="banner_text">See free spots in real time, navigate to the closest area, and save your car location with one tap.</p>
+        <form class="form-group pe-hero-search" method="GET" action="{{ url('/parkings') }}">
+          <input type="text" class="update_mail pe-search-input" placeholder="Search by street / landmark" name="place">
+          <div class="subscribe_bt">
+            <button type="submit" class="pe-search-btn"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <div class="banner_taital_main">
+        <h1 class="banner_taital">Smart<br> City Ready</h1>
+        <p class="banner_text">Designed for outdoor parking lots and streets—simple for drivers, powerful for operators, scalable for cities.</p>
+        <form class="form-group pe-hero-search" method="GET" action="{{ url('/parkings') }}">
+          <input type="text" class="update_mail pe-search-input" placeholder="Search parking zone" name="place">
+          <div class="subscribe_bt">
+            <button type="submit" class="pe-search-btn"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <a class="carousel-control-prev" href="#banner_slider" role="button" data-slide="prev">
+    <i class="fa fa-angle-left"></i>
+  </a>
+  <a class="carousel-control-next" href="#banner_slider" role="button" data-slide="next">
+    <i class="fa fa-angle-right"></i>
+  </a>
+</div>
+
                   <div class="banner_img hero_img_placeholder"><img src="{{ asset('landing/images/banner-img.png') }}" class="hero_img_placeholder_img" alt="" /></div>
                </div>
 </div>
@@ -131,7 +134,8 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <h1 class="models_taital">How It Works</h1>
+              <h1 class="models_taital">How It Works</h1>
+
                </div>
             </div>
             <div class="models_section_2">

@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" href="{{ asset('landing/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('landing/css/style.css') }}">
-        <!-- font css -->
+  <!-- font css -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -15,7 +15,7 @@
     body { background:#f7f7fb; }
     .pe-title{ color:#3a3a5e; font-weight:800; }
     .pe-muted{ color:#6c6c86; }
-    .pe-card{ background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 14px 40px rgba(0,0,0,.08); border:1px solid #eee; }
+    .pe-card{ background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 14px 40px rgba(0,0,0,.08); border:1px solid #eee; width: 100vw;  }
     .pe-btn{ background:#3a3a5e; color:#fff; border:0; border-radius:10px; font-weight:700; }
     .pe-btn:hover{ background:#2f2f4f; color:#fff; }
     .pe-btn-outline{ background:#fff; color:#3a3a5e; border:2px solid #3a3a5e; border-radius:10px; font-weight:800; }
@@ -66,12 +66,26 @@
     <div class="spots-grid">
       @foreach($parking->spots as $s)
         @php
+          // Existing reservation logic (user reservations)
           $res = $activeReservations->get($s->id);
-          $isActive = (bool)$res;
-          $isMine = $isActive && auth()->check() && ($res->user_id ?? null) === auth()->id();
 
+          // ✅ NEW: admin can mark spot as reserved directly in spots.status
+          $isReservedByAdmin = ($s->status === 'reserved');
+
+          // ✅ RESERVED = either admin reserved OR active reservation exists
+          $isActive = $isReservedByAdmin || (bool)$res;
+
+          // "mine" only if there's a reservation and it's by current user
+          $isMine = (bool)$res && auth()->check() && (($res->user_id ?? null) === auth()->id());
+
+          // status text: mine > reserved > available
           $statusText = $isMine ? 'Reserved by you' : ($isActive ? 'Reserved' : 'Available');
+
+          // card class: mine > reserved > available
           $cardClass = $isMine ? 'spot-taxi mine' : ($isActive ? 'spot-taxi reserved' : 'spot-taxi available');
+
+          // Disable if reserved and not mine
+          $disableBtn = $isActive && !$isMine;
         @endphp
 
         <button type="button"
@@ -82,7 +96,7 @@
           data-res-start="{{ $res?->start_time }}"
           data-res-end="{{ $res?->end_time }}"
           onclick="openSpot(this)"
-          @if($isActive && !$isMine) disabled @endif
+          @if($disableBtn) disabled @endif
         >
           <div class="spot-num">#{{ $s->spot_number }}</div>
 
@@ -139,15 +153,15 @@
         @endguest
 
         @auth
-  <form id="reserveForm" method="POST" action="{{ route('user.reservations.store') }}">
-    @csrf
-    <input type="hidden" name="parking_id" value="{{ $parking->id }}">
-    <input type="hidden" name="spot_id" id="spotIdInput" required>
-    <input type="hidden" name="unit" value="hours">
-    <input type="hidden" name="value" value="1">
-    <button type="submit" class="btn pe-btn w-100">Reserve</button>
-  </form>
-@endauth
+          <form id="reserveForm" method="POST" action="{{ route('user.reservations.store') }}">
+            @csrf
+            <input type="hidden" name="parking_id" value="{{ $parking->id }}">
+            <input type="hidden" name="spot_id" id="spotIdInput" required>
+            <input type="hidden" name="unit" value="hours">
+            <input type="hidden" name="value" value="1">
+            <button type="submit" class="btn pe-btn w-100">Reserve</button>
+          </form>
+        @endauth
 
       </div>
     </div>
@@ -176,8 +190,9 @@
 
   function openSpot(el){
     const spotId = el.dataset.spotId || '';
-     const spotIdInput = document.getElementById('spotIdInput');
-         if (spotIdInput) spotIdInput.value = spotId;
+    const spotIdInput = document.getElementById('spotIdInput');
+    if (spotIdInput) spotIdInput.value = spotId;
+
     const spotNumber = el.dataset.spotNumber || '';
     const status = el.dataset.status || '';
     const start = el.dataset.resStart || '';
@@ -199,7 +214,6 @@
     const timeEl = document.getElementById('spotTime');
     if (start && end) timeEl.textContent = `Reserved from ${start} to ${end}`;
     else timeEl.textContent = (status.includes('Available')) ? 'Available now' : '';
-
 
     const reserveForm = document.getElementById('reserveForm');
     const isReserved = status.includes('Reserved');

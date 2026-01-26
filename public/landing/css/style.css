@@ -231,15 +231,48 @@ button {
         display: flex;
     }
 
-    #navbarSupportedContent .nav-item {
-        flex: 1;
-    }
+ #navbarSupportedContent .nav-item:not(.nav-logo-item){
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.nav-logo-item{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    flex: none !important;     /* 🔥 لا ياخد flex */
+    z-index: 10;               /* 🔥 يطلع فوق الكل */
+}
+.nav-logo{
+    width: 70px;   /* كبّري براحتك */
+    height: auto;
+}
+
+.brand-text{
+    font-size: 26px;
+    font-weight: 700;
+    color: #1b1b1b;
+}
 
     #navbarSupportedContent .nav-link {
         text-align: center;
    
         color: #3a3a5e;
     }
+    #navbarSupportedContent .nav-link,
+.logout-link {
+    line-height: 2;
+    padding: 0.5rem 0;
+    display: inline-block;
+}
+.logout-link{
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+}
+
 
     #navbarSupportedContent .nav-link.navbar-brand {
         margin: 0;
@@ -266,10 +299,18 @@ button {
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: #3a3a5e;
+      
         transform: scale(1.25);
         border-radius: 5px;
     }
+    .brand-combo{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+
 
 /* header section end */
 
@@ -534,6 +575,9 @@ button {
     text-transform: uppercase;
     padding-top: 50px;
     text-align: center;
+     background: transparent !important;
+     gap: 0;               /* 🔥 يلغي أي مسافة */
+    margin: 0;
 }
 
 .models_taital::after {
@@ -1229,8 +1273,7 @@ textarea#comment::placeholder {
 .about_section img,
 .models_section img,
 .blog_section img {
-    border-radius: 14px;
-    box-shadow: 0 14px 40px rgba(0,0,0,0.18);
+ 
 }
 
 /* Footer bigger */
@@ -1432,7 +1475,9 @@ textarea#comment::placeholder {
 /* Remove the invisible hero image from the normal flow (prevents extra tall hero)
    while still keeping the markup unchanged */
 .banner_section .col-md-12 {
-    position: relative;
+    display: flex;
+    align-items: center;  
+
 }
 .banner_img.hero_img_placeholder {
     position: absolute;
@@ -1730,8 +1775,8 @@ textarea#comment::placeholder {
 
 .spot-taxi{
   border:2px solid #dcdcdc;
-  border-radius:18px;
-  background:#fff;
+  border-radius:30px;
+  background:#3a3a5e;
   padding:14px 14px 12px;
   text-align:center;
   box-shadow:0 14px 30px rgba(0,0,0,.08);
@@ -1764,7 +1809,7 @@ textarea#comment::placeholder {
 /* number + status */
 .spot-num{
   font-weight:900;
-  color:#3a3a5e;
+  color:#d6d6df;
   margin-bottom:8px;
 }
 .spot-taxi.mine .spot-num{ color:#fff; }
@@ -1773,7 +1818,7 @@ textarea#comment::placeholder {
   margin-top:10px;
   font-weight:800;
   font-size:12px;
-  color:#3a3a5e;
+  color:#d9d9df;
 }
 .spot-taxi.mine .spot-status{ color:#fff; }
 
@@ -1845,7 +1890,22 @@ textarea#comment::placeholder {
 .legend-mini.available{ background:#fff; }
 .legend-mini.reserved{ background:#cfd6ff; border-color:#3a3a5e; }
 .legend-mini.mine{ background:#3a3a5e; border-color:#3a3a5e; }
-.user-page-wrap{ padding-top: 90px; } 
+.user-page-wrap{ padding-top: 90px;  } 
+
+.logo {
+    width: 300px;      /* خليها إذا بدك */
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;  
+}
+
+
+
+
+
+
+
 
 
 

@@ -103,6 +103,9 @@ Route::middleware(['auth', 'admin'])
         Route::post('/spots', [\App\Http\Controllers\Admin\SpotController::class, 'store'])->name('spots.store');
         Route::patch('/spots/{spot}', [\App\Http\Controllers\Admin\SpotController::class, 'update'])->name('spots.update');
         Route::delete('/spots/{spot}', [\App\Http\Controllers\Admin\SpotController::class, 'destroy'])->name('spots.destroy');
+       Route::get('/parkings/{parking}/spots', [\App\Http\Controllers\Admin\SpotController::class, 'index'])
+    ->name('spots.index');
+
 
     });
 
