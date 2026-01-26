@@ -7,6 +7,8 @@
 
   <link rel="stylesheet" href="<?php echo e(asset('landing/css/bootstrap.min.css')); ?>">
   <link rel="stylesheet" href="<?php echo e(asset('landing/css/style.css')); ?>">
+        <!-- font css -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>

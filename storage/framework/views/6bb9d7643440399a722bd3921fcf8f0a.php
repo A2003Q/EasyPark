@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ParkEasy | Subscriptions</title>
 
-  <link rel="stylesheet" href="{{ asset('landing/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('landing/css/style.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('landing/css/bootstrap.min.css')); ?>">
+  <link rel="stylesheet" href="<?php echo e(asset('landing/css/style.css')); ?>">
         <!-- font css -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -59,13 +59,13 @@
   </style>
 </head>
 <body>
-  @if(session('pending_reservation'))
+  <?php if(session('pending_reservation')): ?>
   <div class="alert alert-success">Pending reservation موجود ✅</div>
-@else
+<?php else: ?>
   <div class="alert alert-danger">Pending reservation مش موجود ❌</div>
-@endif
+<?php endif; ?>
 
-@include('user.partials.nav')
+<?php echo $__env->make('user.partials.nav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
 <div class="container user-page-wrap">
   <div class="row mb-4">
@@ -75,18 +75,18 @@
     </div>
   </div>
 
-  @if(session('success'))
-    <script>Swal.fire({icon:'success', title:'Success', text:@json(session('success'))});</script>
-  @endif
-  @if(session('error'))
-    <script>Swal.fire({icon:'error', title:'Oops', text:@json(session('error'))});</script>
-  @endif
+  <?php if(session('success')): ?>
+    <script>Swal.fire({icon:'success', title:'Success', text:<?php echo json_encode(session('success'), 15, 512) ?>});</script>
+  <?php endif; ?>
+  <?php if(session('error')): ?>
+    <script>Swal.fire({icon:'error', title:'Oops', text:<?php echo json_encode(session('error'), 15, 512) ?>});</script>
+  <?php endif; ?>
 
 
 
 
   <div class="row g-4">
-    {{-- BASIC --}}
+    
     <div class="col-md-6">
       <div class="plan-card">
         <div class="plan-top">
@@ -111,8 +111,8 @@
           <div class="feat"><div class="dot"></div><div><div class="txt">Smart availability</div><div class="sub">See available/reserved status instantly</div></div></div>
           <div class="feat"><div class="dot"></div><div><div class="txt">No day booking</div><div class="sub">Daily reservations are not included</div></div></div>
 
-          <form method="POST" action="{{ route('user.subscriptions.store') }}" class="mt-3">
-            @csrf
+          <form method="POST" action="<?php echo e(route('user.subscriptions.store')); ?>" class="mt-3">
+            <?php echo csrf_field(); ?>
             <input type="hidden" name="plan" value="basic">
             <button class="pe-btn w-100" type="submit">Subscribe Basic</button>
           </form>
@@ -120,7 +120,7 @@
       </div>
     </div>
 
-    {{-- PREMIUM --}}
+    
     <div class="col-md-6">
       <div class="plan-card">
         <div class="plan-top">
@@ -146,8 +146,8 @@
           <div class="feat"><div class="dot"></div><div><div class="txt">Priority experience</div><div class="sub">Better flexibility for busy areas</div></div></div>
           <div class="feat"><div class="dot"></div><div><div class="txt">All Basic features</div><div class="sub">Everything included in Basic</div></div></div>
 
-          <form method="POST" action="{{ route('user.subscriptions.store') }}" class="mt-3">
-            @csrf
+          <form method="POST" action="<?php echo e(route('user.subscriptions.store')); ?>" class="mt-3">
+            <?php echo csrf_field(); ?>
             <input type="hidden" name="plan" value="premium">
             <button class="pe-btn w-100" type="submit">Subscribe Premium</button>
           </form>
@@ -163,8 +163,9 @@
   </div>
 </div>
 
-<script src="{{ asset('landing/js/bootstrap.bundle.min.js') }}"></script>
+<script src="<?php echo e(asset('landing/js/bootstrap.bundle.min.js')); ?>"></script>
 </body>
 </html>
 
 
+<?php /**PATH C:\Users\DELL\Downloads\Parking-Finder2-stage4-auth-flow\resources\views/user/subscriptions/index.blade.php ENDPATH**/ ?>

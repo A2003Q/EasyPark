@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ParkEasy | {{ $parking->name }}</title>
+  <title>ParkEasy | <?php echo e($parking->name); ?></title>
 
-  <link rel="stylesheet" href="{{ asset('landing/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('landing/css/style.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('landing/css/bootstrap.min.css')); ?>">
+  <link rel="stylesheet" href="<?php echo e(asset('landing/css/style.css')); ?>">
         <!-- font css -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -30,32 +30,32 @@
 </head>
 <body>
 
-@php
+<?php
   $sub = auth()->check() ? auth()->user()->subscriptions()->latest()->first() : null;
-@endphp
+?>
 
-@include('user.partials.nav')
+<?php echo $__env->make('user.partials.nav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
 <div class="container user-page-wrap">
   <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
     <div>
-      <h2 class="pe-title mb-1">{{ $parking->name }}</h2>
-      <div class="pe-muted">{{ optional($parking->city)->name }} • {{ $parking->address }}</div>
-      <div class="pe-muted">Price: <b>{{ $parking->price_per_hour }} JOD / hour</b></div>
+      <h2 class="pe-title mb-1"><?php echo e($parking->name); ?></h2>
+      <div class="pe-muted"><?php echo e(optional($parking->city)->name); ?> • <?php echo e($parking->address); ?></div>
+      <div class="pe-muted">Price: <b><?php echo e($parking->price_per_hour); ?> JOD / hour</b></div>
     </div>
-    <a href="{{ route('user.parkings.index') }}" class="btn pe-btn-outline">Back</a>
+    <a href="<?php echo e(route('user.parkings.index')); ?>" class="btn pe-btn-outline">Back</a>
   </div>
 
   <div class="pe-card p-3 mb-3">
     <div class="row g-3 align-items-center">
       <div class="col-md-4">
-        <img src="{{ $parking->image_url ? $parking->image_url : asset('landing/images/img-5.png') }}"
+        <img src="<?php echo e($parking->image_url ? $parking->image_url : asset('landing/images/img-5.png')); ?>"
              alt="parking" style="width:100%;height:220px;object-fit:cover;border-radius:14px;">
       </div>
       <div class="col-md-8">
         <div class="d-flex flex-wrap gap-2">
-          <span class="pe-pill pe-pill-ava">Available: {{ $parking->spots->where('status','available')->count() }}</span>
-          <span class="pe-pill pe-pill-busy">Reserved: {{ $parking->spots->where('status','reserved')->count() }}</span>
+          <span class="pe-pill pe-pill-ava">Available: <?php echo e($parking->spots->where('status','available')->count()); ?></span>
+          <span class="pe-pill pe-pill-busy">Reserved: <?php echo e($parking->spots->where('status','reserved')->count()); ?></span>
         </div>
         <div class="mt-3 pe-muted">Tap a spot to see details. Available spots are clickable.</div>
       </div>
@@ -64,27 +64,27 @@
 
   <div class="pe-card p-3">
     <div class="spots-grid">
-      @foreach($parking->spots as $s)
-        @php
+      <?php $__currentLoopData = $parking->spots; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $s): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php
           $res = $activeReservations->get($s->id);
           $isActive = (bool)$res;
           $isMine = $isActive && auth()->check() && ($res->user_id ?? null) === auth()->id();
 
           $statusText = $isMine ? 'Reserved by you' : ($isActive ? 'Reserved' : 'Available');
           $cardClass = $isMine ? 'spot-taxi mine' : ($isActive ? 'spot-taxi reserved' : 'spot-taxi available');
-        @endphp
+        ?>
 
         <button type="button"
-          class="{{ $cardClass }}"
-          data-spot-id="{{ $s->id }}"
-          data-spot-number="{{ $s->spot_number }}"
-          data-status="{{ $statusText }}"
-          data-res-start="{{ $res?->start_time }}"
-          data-res-end="{{ $res?->end_time }}"
+          class="<?php echo e($cardClass); ?>"
+          data-spot-id="<?php echo e($s->id); ?>"
+          data-spot-number="<?php echo e($s->spot_number); ?>"
+          data-status="<?php echo e($statusText); ?>"
+          data-res-start="<?php echo e($res?->start_time); ?>"
+          data-res-end="<?php echo e($res?->end_time); ?>"
           onclick="openSpot(this)"
-          @if($isActive && !$isMine) disabled @endif
+          <?php if($isActive && !$isMine): ?> disabled <?php endif; ?>
         >
-          <div class="spot-num">#{{ $s->spot_number }}</div>
+          <div class="spot-num">#<?php echo e($s->spot_number); ?></div>
 
           <div class="taxi-svg-wrap">
             <svg viewBox="0 0 220 110" class="taxi-svg" aria-hidden="true">
@@ -101,9 +101,9 @@
             </svg>
           </div>
 
-          <div class="spot-status">{{ $statusText }}</div>
+          <div class="spot-status"><?php echo e($statusText); ?></div>
         </button>
-      @endforeach
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 
     <div class="spot-legend taxi-legend">
@@ -130,46 +130,46 @@
         <p class="pe-muted mt-2 mb-0" id="spotTime"></p>
         <hr class="my-3">
 
-        @guest
-          <a href="{{ route('login') }}" class="btn pe-btn w-100">Login to Reserve</a>
+        <?php if(auth()->guard()->guest()): ?>
+          <a href="<?php echo e(route('login')); ?>" class="btn pe-btn w-100">Login to Reserve</a>
           <div class="mt-2 pe-muted" style="font-size:13px;">
             Don’t have an account?
-            <a href="{{ route('register') }}" style="font-weight:900;color:#3a3a5e;">Sign up</a>
+            <a href="<?php echo e(route('register')); ?>" style="font-weight:900;color:#3a3a5e;">Sign up</a>
           </div>
-        @endguest
+        <?php endif; ?>
 
-        @auth
-  <form id="reserveForm" method="POST" action="{{ route('user.reservations.store') }}">
-    @csrf
-    <input type="hidden" name="parking_id" value="{{ $parking->id }}">
+        <?php if(auth()->guard()->check()): ?>
+  <form id="reserveForm" method="POST" action="<?php echo e(route('user.reservations.store')); ?>">
+    <?php echo csrf_field(); ?>
+    <input type="hidden" name="parking_id" value="<?php echo e($parking->id); ?>">
     <input type="hidden" name="spot_id" id="spotIdInput" required>
     <input type="hidden" name="unit" value="hours">
     <input type="hidden" name="value" value="1">
     <button type="submit" class="btn pe-btn w-100">Reserve</button>
   </form>
-@endauth
+<?php endif; ?>
 
       </div>
     </div>
   </div>
 </div>
 
-@if(session('success'))
+<?php if(session('success')): ?>
   <script>
-    Swal.fire({icon:'success', title:'Success', text:@json(session('success'))});
+    Swal.fire({icon:'success', title:'Success', text:<?php echo json_encode(session('success'), 15, 512) ?>});
   </script>
-@endif
-@if(session('error'))
+<?php endif; ?>
+<?php if(session('error')): ?>
   <script>
-    Swal.fire({icon:'error', title:'Oops', text:@json(session('error'))});
+    Swal.fire({icon:'error', title:'Oops', text:<?php echo json_encode(session('error'), 15, 512) ?>});
   </script>
-@endif
+<?php endif; ?>
 
-<script src="{{ asset('landing/js/jquery.min.js') }}"></script>
-<script src="{{ asset('landing/js/bootstrap.bundle.min.js') }}"></script>
+<script src="<?php echo e(asset('landing/js/jquery.min.js')); ?>"></script>
+<script src="<?php echo e(asset('landing/js/bootstrap.bundle.min.js')); ?>"></script>
 
 <script>
-  const IS_AUTH = @json(auth()->check());
+  const IS_AUTH = <?php echo json_encode(auth()->check(), 15, 512) ?>;
 
   const modalEl = document.getElementById('spotModal');
   const spotModal = new bootstrap.Modal(modalEl);
@@ -213,3 +213,4 @@
 
 </body>
 </html>
+<?php /**PATH C:\Users\DELL\Downloads\Parking-Finder2-stage4-auth-flow\resources\views/user/parkings/show.blade.php ENDPATH**/ ?>

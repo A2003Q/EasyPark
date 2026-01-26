@@ -7,7 +7,8 @@
 
   <link rel="stylesheet" href="{{ asset('landing/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('landing/css/style.css') }}">
-
+        <!-- font css -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 

@@ -237,8 +237,8 @@ button {
 
     #navbarSupportedContent .nav-link {
         text-align: center;
-        text-transform: uppercase;
-        color: black;
+   
+        color: #3a3a5e;
     }
 
     #navbarSupportedContent .nav-link.navbar-brand {

@@ -144,7 +144,7 @@
                      <p class="ullamco_text">Type a location or use GPS to find the closest outdoor parking zones around you—fast, simple, and clear.</p>
                      <div class="price_main">
                         <p class="price_text"><span style="color: #3a3a5e;">Benefit</span> Less time searching</p>
-                        <div class="read_btn"><a href="#">See Details<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+                        <div class="read_btn"><a href="{{ url('/parkings') }}">See Details<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
                      </div>
                   </div>
                </div>
@@ -156,7 +156,7 @@
                      <p class="ullamco_text">See which spots are available, occupied, or limited. Choose the best option and navigate right to it.</p>
                      <div class="price_main">
                         <p class="price_text"><span style="color: #3a3a5e;">Benefit</span> Clear availability</p>
-                        <div class="read_btn"><a href="#">See Details<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+                        <div class="read_btn"><a href="{{ url('/parkings') }}">See Details<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
                      </div>
                   </div>
                   <div class="col-md-6">
@@ -174,7 +174,7 @@
                      <p class="ullamco_text">After you park, save your spot instantly and get guided back later—perfect for busy streets and large outdoor lots.</p>
                      <div class="price_main">
                         <p class="price_text"><span style="color: #3a3a5e;">Benefit</span> Never forget where you parked</p>
-                        <div class="read_btn"><a href="#">See Details<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+                        <div class="read_btn"><a href="{{ url('/parkings') }}">See Details<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
                      </div>
                   </div>
                </div>
@@ -209,35 +209,35 @@
                   <div class="col-md-4">
                      <div class="blog_img"><img src="{{ asset('landing/images/img-4.png') }}"></div>
                      <div class="btn_main">
-                        <div class="date_text"><a href="#">Availability: Live</a></div>
+                        <div class="date_text"><a href="{{ url('/parkings') }}">Availability: Live</a></div>
                      </div>
                      <div class="blog_box">
                         <h3 class="blog_text">Downtown Zone</h3>
                         <p class="lorem_text">Quick access to the busiest streets, with nearby available spots updated by operators.</p>
                      </div>
-                     <div class="read_bt"><a href="#">View Area<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+                     <div class="read_bt"><a href="{{ url('/parkings') }}">View Area<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
                   </div>
                   <div class="col-md-4">
                      <div class="blog_img"><img src="{{ asset('landing/images/img-5.png') }}"></div>
                      <div class="btn_main">
-                        <div class="date_text active"><a href="#">Availability: High</a></div>
+                        <div class="date_text active"><a href="{{ url('/parkings') }}">Availability: High</a></div>
                      </div>
                      <div class="blog_box">
                         <h3 class="blog_text">Campus Parking</h3>
                         <p class="lorem_text">Designed for students and staff—save your car location and get guided back anytime.</p>
                      </div>
-                     <div class="read_bt active"><a href="#">View Area<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+                     <div class="read_bt active"><a href="{{ url('/parkings') }}">View Area<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
                   </div>
                   <div class="col-md-4">
                      <div class="blog_img"><img src="{{ asset('landing/images/img-6.png') }}"></div>
                      <div class="btn_main">
-                        <div class="date_text"><a href="#">Availability: Limited</a></div>
+                        <div class="date_text"><a href="{{ url('/parkings') }}">Availability: Limited</a></div>
                      </div>
                      <div class="blog_box">
                         <h3 class="blog_text">Hospital Area</h3>
                         <p class="lorem_text">Find the closest spot quickly when every minute matters—clear status and easy navigation.</p>
                      </div>
-                     <div class="read_bt"><a href="#">View Area<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
+                     <div class="read_bt"><a href="{{ url('/parkings') }}">View Area<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
                   </div>
                </div>
             </div>
@@ -263,7 +263,7 @@
                                  <div class="customer_img"><img src="{{ asset('landing/images/client-img.png') }}"></div>
                               </div>
                               <div class="customer_right">
-                                 <h3 class="customer_name">Dana M.</h3>
+                                 <h3 class="customer_name">Omar M.</h3>
                                  <p class="enim_text">I used to waste so much time driving around looking for a spot. With ParkEasy I can see nearby availability and save where I parked. It feels like a real smart-city feature.</p>
                                  <div class="quick_icon"><img src="{{ asset('landing/images/quick-icon.png') }}"></div>
                               </div>

@@ -5,7 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ParkEasy | Login</title>
-
+        <!-- font css -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="<?php echo e(asset('landing/css/bootstrap.min.css')); ?>">
   <link rel="stylesheet" type="text/css" href="<?php echo e(asset('landing/css/style.css')); ?>">
   <style>
@@ -53,6 +54,7 @@
     background: rgba(255,255,255,0.94);
     backdrop-filter: saturate(120%);
     border-radius: 16px;
+    border: 5px solid #3a3a5e ;
     box-shadow: 0 18px 45px rgba(0,0,0,0.25);
   }
 
@@ -115,7 +117,7 @@
       <div class="col-md-6 col-lg-5">
         <div class="auth_card">
           <div class="auth_brand text-center">
-            <a href="<?php echo e(route('home')); ?>#top" class="auth_logo"><span><span>PA</span>rkEasy</span></a>
+            <a href="<?php echo e(route('home')); ?>#top" class="auth_logo"><span>EasyPark</span></a>
             <p class="auth_subtitle text-center">Sign in to continue</p>
           </div>
 
