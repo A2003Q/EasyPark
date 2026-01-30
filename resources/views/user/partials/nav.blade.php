@@ -1,6 +1,6 @@
-<header class="header_section" id="top">
+<header class="header_section user-header" id="top">
   <div class="container">
-    <nav class="navbar navbar-expand-lg custom_nav-container">
+    <nav class="navbar navbar-expand-lg custom_nav-container user-nav">
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class=""></span>
@@ -9,10 +9,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" style="color: #3a3a5e" href="{{ route('user.parkings.index') }}">Parkings</a>
+            <a class="nav-link" href="{{ route('user.parkings.index') }}">Parkings</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="color: #3a3a5e" href="{{ route('user.subscriptions.index') }}">Subscriptions</a>
+            <a class="nav-link" href="{{ route('user.subscriptions.index') }}">Subscriptions</a>
           </li>
           
           <!-- Logo in Center -->
@@ -24,17 +24,17 @@
 
           @auth
             <li class="nav-item">
-              <a class="nav-link" style="color: #3a3a5e" href="{{ route('user.profile') }}">Profile</a>
+              <a class="nav-link" href="{{ route('user.profile') }}">Profile</a>
             </li>
             <li class="nav-item">
               <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                 @csrf
-                <button type="submit" class="nav-link logout-link" style="color: #3a3a5e">Logout</button>
+                <button type="submit" class="nav-link logout-link">Logout</button>
               </form>
             </li>
           @else
             <li class="nav-item">
-              <a class="nav-link" style="color: #3a3a5e" href="{{ route('login') }}">Sign in</a>
+              <a class="nav-link" href="{{ route('login') }}">Sign in</a>
             </li>
           @endauth
         </ul>

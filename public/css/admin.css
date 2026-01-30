@@ -97,16 +97,43 @@ html, body { height: 100%; margin:0; font-family: 'Nunito', sans-serif; }
 #wrapper { display: flex; min-height: 100vh; align-items: stretch; }
 
         /* Sidebar */
-        .sidebar { min-width: 250px; max-width: 250px; background: linear-gradient(180deg, #1f1f2e, #3a3a5e); color: white; display: flex; flex-direction: column; transition: 0.3s; box-shadow: 2px 0 12px rgba(0,0,0,0.2); }
+       .sidebar {
+    position: fixed;            /* يخليها ثابتة */
+    top: 0;
+    left: 0;
+    height: 100vh;               /* بطول الشاشة */
+    min-width: 250px;
+    max-width: 250px;
+
+    background: linear-gradient(180deg, #1f1f2e, #3a3a5e);
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 2px 0 12px rgba(0,0,0,0.2);
+    z-index: 1000;
+
+    overflow-y: auto;            /* لو زادت العناصر */
+}
         .sidebar .sidebar-brand { padding: 1.5rem; font-size: 1.5rem; font-weight: 700; text-align:center; background-color: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.2); }
         .sidebar a { color: #f0f0f5; text-decoration:none; display:flex; align-items:center; padding:0.9rem 1.5rem; font-size:1rem; border-radius:8px; margin:0.3rem 0; transition:0.3s; }
         .sidebar a i { margin-right: 10px; font-size:1.2rem; }
         .sidebar a:hover { background-color:#5a5a7a; transform: translateX(5px); }
         .sidebar .nav-item.active a { background-color:#7a78a0; font-weight:600; }
         .sidebar hr { border-color: rgba(255,255,255,0.2); margin:1rem 0; }
+        .sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+}
+
 
         /* Content */
-        #content { flex-grow:1; padding:2rem; background-color:#f8f7fa; transition: all 0.3s ease; }
+        #content { flex-grow:1; padding:2rem; background-color:#f8f7fa; transition: all 0.3s ease; margin-left:250px; }
 
         /* Cards */
         .dashboard-row {

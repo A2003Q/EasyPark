@@ -566,7 +566,7 @@
 </div>
 
 <!-- Navbar -->
-@include('user.partials.nav')
+@include('landing.partials.nav')
 
 <div class="container user-page-wrap">
   <!-- Page Header -->

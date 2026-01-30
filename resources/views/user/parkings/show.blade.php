@@ -711,7 +711,7 @@
   $sub = auth()->check() ? auth()->user()->subscriptions()->latest()->first() : null;
 @endphp
 
-@include('user.partials.nav')
+@include('landing.partials.nav')
 
 <div class="container user-page-wrap">
   <!-- Enhanced Page Header with Gradient -->

@@ -566,7 +566,7 @@
 </div>
 
 <!-- Navbar -->
-<?php echo $__env->make('user.partials.nav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+<?php echo $__env->make('landing.partials.nav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
 <div class="container user-page-wrap">
   <!-- Page Header -->
