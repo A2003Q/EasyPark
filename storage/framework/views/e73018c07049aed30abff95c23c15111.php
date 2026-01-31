@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ParkEasy | My Profile</title>
 
-  <link rel="stylesheet" href="{{ asset('landing/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('landing/css/style.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('landing/css/bootstrap.min.css')); ?>">
+  <link rel="stylesheet" href="<?php echo e(asset('landing/css/style.css')); ?>">
   <!-- font css -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -34,7 +34,7 @@
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url("{{ asset('landing/images/login-bg.jpg') }}");
+      background-image: url("<?php echo e(asset('landing/images/login-bg.jpg')); ?>");
       background-size: cover;
       background-position: center;
       filter: blur(3px) brightness(0.9);
@@ -964,7 +964,7 @@
 </head>
 <body>
 
-@include('landing.partials.nav')
+<?php echo $__env->make('landing.partials.nav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
 <div class="profile-bg">
   <div class="shape shape1"></div>
@@ -975,15 +975,16 @@
 
     <div class="profile-layout">
 
-      {{-- Sidebar --}}
+      
       <div class="box p-4 side profile-sidebar">
         <div class="sidebar-inner">
           <div class="account-header">
             <div class="user-avatar">
-              {{ strtoupper(substr($user->name, 0, 1)) }}
+              <?php echo e(strtoupper(substr($user->name, 0, 1))); ?>
+
             </div>
-            <div class="user-name">{{ $user->name }}</div>
-            <div class="user-email">{{ $user->email }}</div>
+            <div class="user-name"><?php echo e($user->name); ?></div>
+            <div class="user-email"><?php echo e($user->email); ?></div>
           </div>
 
           <a class="tab-link active" data-target="tab-info">
@@ -1006,32 +1007,32 @@
         </div>
       </div>
 
-      {{-- Content --}}
+      
       <div style="flex:1;">
 
-        {{-- Tab 1: Info --}}
+        
         <div id="tab-info" class="box p-5 mb-4 profile-tab active">
           <div class="profile-header">
             <div class="profile-header-left">
               <h1>Profile Information</h1>
               <p class="section-subtitle">Manage your personal account details</p>
             </div>
-            <span class="pill">{{ strtoupper($user->role ?? 'user') }}</span>
+            <span class="pill"><?php echo e(strtoupper($user->role ?? 'user')); ?></span>
           </div>
 
           <div class="info-grid">
             <div class="info-item">
               <label class="muted">Full Name</label>
-              <div class="info-value">{{ $user->name }}</div>
+              <div class="info-value"><?php echo e($user->name); ?></div>
             </div>
             <div class="info-item">
               <label class="muted">Email Address</label>
-              <div class="info-value">{{ $user->email }}</div>
+              <div class="info-value"><?php echo e($user->email); ?></div>
             </div>
           </div>
         </div>
 
-        {{-- Tab 2: Reservations --}}
+        
         <div id="tab-res" class="box p-5 mb-4 profile-tab">
           <div class="profile-header">
             <div class="profile-header-left">
@@ -1040,32 +1041,36 @@
             </div>
           </div>
 
-          @forelse($reservations as $r)
+          <?php $__empty_1 = true; $__currentLoopData = $reservations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $r): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
             <div class="reservation-card">
               <div class="parking-name">
-                {{ $r->parking->name ?? 'Parking' }}
+                <?php echo e($r->parking->name ?? 'Parking'); ?>
+
               </div>
               <div class="reservation-details">
                 <div class="detail-item">
-                  <span>📍 Spot:</span> {{ $r->spot->spot_number ?? '-' }}
+                  <span>📍 Spot:</span> <?php echo e($r->spot->spot_number ?? '-'); ?>
+
                 </div>
                 <div class="detail-item">
-                  <span>🕐 From:</span> {{ $r->start_time }}
+                  <span>🕐 From:</span> <?php echo e($r->start_time); ?>
+
                 </div>
                 <div class="detail-item">
-                  <span>🕐 To:</span> {{ $r->end_time }}
+                  <span>🕐 To:</span> <?php echo e($r->end_time); ?>
+
                 </div>
               </div>
             </div>
-          @empty
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
             <div class="empty-state">
               <div class="icon">🅿️</div>
               <div class="message">No reservations yet. Start booking your parking spots!</div>
             </div>
-          @endforelse
+          <?php endif; ?>
         </div>
 
-        {{-- Tab 3: Subscription --}}
+        
         <div id="tab-sub" class="box p-5 profile-tab">
           <div class="profile-header">
             <div class="profile-header-left">
@@ -1074,86 +1079,88 @@
             </div>
           </div>
 
-          @if($subscription)
+          <?php if($subscription): ?>
             <div class="subscription-card">
               <div class="subscription-header">
-                <div class="plan-name">{{ strtoupper($subscription->plan) }}</div>
-                <div class="status-badge">{{ strtoupper($subscription->status) }}</div>
+                <div class="plan-name"><?php echo e(strtoupper($subscription->plan)); ?></div>
+                <div class="status-badge"><?php echo e(strtoupper($subscription->status)); ?></div>
               </div>
 
               <div class="subscription-grid">
                 <div class="sub-item">
                   <div class="label">Price</div>
-                  <div class="value">{{ $subscription->price }} JOD</div>
+                  <div class="value"><?php echo e($subscription->price); ?> JOD</div>
                 </div>
 
                 <div class="sub-item">
                   <div class="label">Hours Limit</div>
-                  <div class="value">{{ $subscription->hours_limit }}</div>
+                  <div class="value"><?php echo e($subscription->hours_limit); ?></div>
                 </div>
 
                 <div class="sub-item">
                   <div class="label">Hours Used</div>
-                  <div class="value">{{ $subscription->hours_used }}</div>
+                  <div class="value"><?php echo e($subscription->hours_used); ?></div>
                 </div>
 
                 <div class="sub-item">
                   <div class="label">Days Limit</div>
-                  <div class="value">{{ $subscription->days_limit }}</div>
+                  <div class="value"><?php echo e($subscription->days_limit); ?></div>
                 </div>
 
                 <div class="sub-item">
                   <div class="label">Days Used</div>
-                  <div class="value">{{ $subscription->days_used }}</div>
+                  <div class="value"><?php echo e($subscription->days_used); ?></div>
                 </div>
 
                 <div class="sub-item">
                   <div class="label">Start Date</div>
                   <div class="value">
-                    {{ \Carbon\Carbon::parse($subscription->start_date)->format('M d, Y') }}
+                    <?php echo e(\Carbon\Carbon::parse($subscription->start_date)->format('M d, Y')); ?>
+
                   </div>
                 </div>
 
                 <div class="sub-item">
                   <div class="label">End Date</div>
                   <div class="value">
-                    {{ \Carbon\Carbon::parse($subscription->end_date)->format('M d, Y') }}
+                    <?php echo e(\Carbon\Carbon::parse($subscription->end_date)->format('M d, Y')); ?>
+
                   </div>
                 </div>
               </div>
 
-              @if($subscription->hours_limit > 0)
+              <?php if($subscription->hours_limit > 0): ?>
               <div class="progress-wrapper">
                 <div class="progress-label">
                   <span>Hours Usage</span>
-                  <span>{{ $subscription->hours_used }} / {{ $subscription->hours_limit }}</span>
+                  <span><?php echo e($subscription->hours_used); ?> / <?php echo e($subscription->hours_limit); ?></span>
                 </div>
                 <div class="progress-bar-custom">
-                  <div class="progress-bar-fill" style="width: {{ ($subscription->hours_used / $subscription->hours_limit) * 100 }}%"></div>
+                  <div class="progress-bar-fill" style="width: <?php echo e(($subscription->hours_used / $subscription->hours_limit) * 100); ?>%"></div>
                 </div>
               </div>
-              @endif
+              <?php endif; ?>
 
-              @if($subscription->days_limit > 0)
+              <?php if($subscription->days_limit > 0): ?>
               <div class="progress-wrapper">
                 <div class="progress-label">
                   <span>Days Usage</span>
-                  <span>{{ $subscription->days_used }} / {{ $subscription->days_limit }}</span>
+                  <span><?php echo e($subscription->days_used); ?> / <?php echo e($subscription->days_limit); ?></span>
                 </div>
                 <div class="progress-bar-custom">
-                  <div class="progress-bar-fill" style="width: {{ ($subscription->days_used / $subscription->days_limit) * 100 }}%"></div>
+                  <div class="progress-bar-fill" style="width: <?php echo e(($subscription->days_used / $subscription->days_limit) * 100); ?>%"></div>
                 </div>
               </div>
-              @endif
+              <?php endif; ?>
             </div>
-          @else
+          <?php else: ?>
             <div class="no-subscription">
               <div class="icon">💳</div>
               <div class="title">No Active Subscription</div>
               <div class="description">Subscribe to one of our plans to enjoy exclusive parking benefits and save time!</div>
               <a href="/subscriptions" class="btn-custom">Explore Subscription Plans</a>
             </div>
-          @endif
+          <?php endif; ?>
         </div>
 
       </div>
@@ -1161,32 +1168,32 @@
   </div>
 </div>
 
-{{-- SweetAlert --}}
-@if(session('success'))
+
+<?php if(session('success')): ?>
 <script>
 Swal.fire({
   icon: 'success',
   title: 'Success',
-  text: @json(session('success')),
+  text: <?php echo json_encode(session('success'), 15, 512) ?>,
   confirmButtonColor: '#3a3a5e',
   confirmButtonText: 'Great!'
 });
 </script>
-@endif
+<?php endif; ?>
 
-@if(session('error'))
+<?php if(session('error')): ?>
 <script>
 Swal.fire({
   icon: 'error',
   title: 'Oops',
-  text: @json(session('error')),
+  text: <?php echo json_encode(session('error'), 15, 512) ?>,
   confirmButtonColor: '#3a3a5e',
   confirmButtonText: 'Try Again'
 });
 </script>
-@endif
+<?php endif; ?>
 
-<script src="{{ asset('landing/js/bootstrap.bundle.min.js') }}"></script>
+<script src="<?php echo e(asset('landing/js/bootstrap.bundle.min.js')); ?>"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -1220,3 +1227,4 @@ document.addEventListener('DOMContentLoaded', function () {
 </html>
 
 
+<?php /**PATH C:\Users\DELL\Downloads\Parking-Finder2-stage4-auth-flow\resources\views/user/profile/index.blade.php ENDPATH**/ ?>

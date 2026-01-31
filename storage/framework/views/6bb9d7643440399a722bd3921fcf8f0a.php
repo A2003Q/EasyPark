@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ParkIt | Choose Your Plan</title>
 
-  <link rel="stylesheet" href="{{ asset('landing/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('landing/css/style.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('landing/css/bootstrap.min.css')); ?>">
+  <link rel="stylesheet" href="<?php echo e(asset('landing/css/style.css')); ?>">
   <!-- font css -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -439,7 +439,7 @@
 </head>
 <body>
 
-@include('landing.partials.nav')
+<?php echo $__env->make('landing.partials.nav', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
 <div class="container user-page-wrap">
   <!-- Page Header -->
@@ -508,8 +508,8 @@
           </div>
         </div>
 
-        <form method="POST" action="{{ route('user.subscriptions.store') }}">
-          @csrf
+        <form method="POST" action="<?php echo e(route('user.subscriptions.store')); ?>">
+          <?php echo csrf_field(); ?>
           <input type="hidden" name="plan" value="basic">
           <button class="pe-btn" type="submit">
             <i class="fas fa-rocket"></i>
@@ -576,8 +576,8 @@
           </div>
         </div>
 
-        <form method="POST" action="{{ route('user.subscriptions.store') }}">
-          @csrf
+        <form method="POST" action="<?php echo e(route('user.subscriptions.store')); ?>">
+          <?php echo csrf_field(); ?>
           <input type="hidden" name="plan" value="premium">
           <button class="pe-btn" type="submit">
             <i class="fas fa-crown"></i>
@@ -599,31 +599,32 @@
   </div>
 </div>
 
-@if(session('success'))
+<?php if(session('success')): ?>
   <script>
     Swal.fire({
       icon: 'success',
       title: 'Success!',
-      text: @json(session('success')),
+      text: <?php echo json_encode(session('success'), 15, 512) ?>,
       confirmButtonColor: '#87CEEB',
       timer: 3000
     });
   </script>
-@endif
+<?php endif; ?>
 
-@if(session('error'))
+<?php if(session('error')): ?>
   <script>
     Swal.fire({
       icon: 'error',
       title: 'Oops!',
-      text: @json(session('error')),
+      text: <?php echo json_encode(session('error'), 15, 512) ?>,
       confirmButtonColor: '#3a3a5e'
     });
   </script>
-@endif
+<?php endif; ?>
 
-<script src="{{ asset('landing/js/bootstrap.bundle.min.js') }}"></script>
+<script src="<?php echo e(asset('landing/js/bootstrap.bundle.min.js')); ?>"></script>
 </body>
 </html>
 
 
+<?php /**PATH C:\Users\DELL\Downloads\Parking-Finder2-stage4-auth-flow\resources\views/user/subscriptions/index.blade.php ENDPATH**/ ?>

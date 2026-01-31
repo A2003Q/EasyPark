@@ -1,43 +1,43 @@
-@extends('admin.layout')
-
-@section('content')
-@php
+<?php $__env->startSection('content'); ?>
+<?php
     $isOwner = strtolower(auth()->user()->role ?? '') === 'owner';
     // base prefix for ajax urls
     $basePrefix = $isOwner ? '/owner' : '/admin';
-@endphp
+?>
 
 <div class="admin-page">
     <div class="page-header">
         <h2 class="admin-title text-center mb-4">Parkings Management</h2>
     </div>
 
-    @if(session('success'))
+    <?php if(session('success')): ?>
         <div class="alert alert-success text-center mb-4" style="background: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: 12px; border-radius: 8px;">
-            {{ session('success') }}
+            <?php echo e(session('success')); ?>
+
         </div>
-    @endif
+    <?php endif; ?>
 
     <!-- Add Parking Button -->
     <div class="text-end mb-4">
-        <a href="{{ $isOwner ? route('owner.parkings.create') : route('admin.parkings.create') }}" class="btn btn-primary"
+        <a href="<?php echo e($isOwner ? route('owner.parkings.create') : route('admin.parkings.create')); ?>" class="btn btn-primary"
             style="display: inline-block; background: linear-gradient(180deg, #1f1f2e, #3a3a5e); color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
             + Add Parking
         </a>
     </div>
 
     <!-- Filter Form -->
-    <form method="GET" action="{{ $isOwner ? route('owner.parkings.index') : route('admin.parkings.index') }}"
+    <form method="GET" action="<?php echo e($isOwner ? route('owner.parkings.index') : route('admin.parkings.index')); ?>"
           style="background: white; padding: 16px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; display: flex; gap: 12px; flex-wrap: wrap; align-items: end;">
         <div>
             <label style="display: block; margin-bottom: 4px; font-size: 0.85rem; color: #555;">City</label>
             <select name="city_id" style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 6px;">
                 <option value="">All Cities</option>
-                @foreach($cities as $city)
-                    <option value="{{ $city->id }}" {{ request('city_id') == $city->id ? 'selected' : '' }}>
-                        {{ $city->name }}
+                <?php $__currentLoopData = $cities; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $city): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($city->id); ?>" <?php echo e(request('city_id') == $city->id ? 'selected' : ''); ?>>
+                        <?php echo e($city->name); ?>
+
                     </option>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </select>
         </div>
 
@@ -45,8 +45,8 @@
             <label style="display: block; margin-bottom: 4px; font-size: 0.85rem; color: #555;">Status</label>
             <select name="is_active" style="padding: 6px 10px; border: 1px solid #ccc; border-radius: 6px;">
                 <option value="">All Status</option>
-                <option value="1" {{ request('is_active') === '1' ? 'selected' : '' }}>Active</option>
-                <option value="0" {{ request('is_active') === '0' ? 'selected' : '' }}>Inactive</option>
+                <option value="1" <?php echo e(request('is_active') === '1' ? 'selected' : ''); ?>>Active</option>
+                <option value="0" <?php echo e(request('is_active') === '0' ? 'selected' : ''); ?>>Inactive</option>
             </select>
         </div>
 
@@ -73,30 +73,31 @@
             </thead>
 
             <tbody>
-                @foreach($parkings as $parking)
+                <?php $__currentLoopData = $parkings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $parking): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td>{{ $loop->iteration + ($parkings->currentPage() - 1) * $parkings->perPage() }}</td>
-                        <td>{{ $parking->name }}</td>
-                        <td>{{ $parking->city->name }}</td>
-                        <td>{{ $parking->total_spots }}</td>
-                        <td>{{ $parking->available_spots }}</td>
-                        <td>{{ $parking->price_per_hour }} JD</td>
+                        <td><?php echo e($loop->iteration + ($parkings->currentPage() - 1) * $parkings->perPage()); ?></td>
+                        <td><?php echo e($parking->name); ?></td>
+                        <td><?php echo e($parking->city->name); ?></td>
+                        <td><?php echo e($parking->total_spots); ?></td>
+                        <td><?php echo e($parking->available_spots); ?></td>
+                        <td><?php echo e($parking->price_per_hour); ?> JD</td>
                         <td>
-                            <span style="background: {{ $parking->is_active ? '#3a3a5e' : '#771c25' }}; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">
-                                {{ $parking->is_active ? 'Active' : 'Inactive' }}
+                            <span style="background: <?php echo e($parking->is_active ? '#3a3a5e' : '#771c25'); ?>; color: white; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem;">
+                                <?php echo e($parking->is_active ? 'Active' : 'Inactive'); ?>
+
                             </span>
                         </td>
                         <td>
-                            <a href="{{ $isOwner ? route('owner.parkings.edit', $parking) : route('admin.parkings.edit', $parking) }}"
+                            <a href="<?php echo e($isOwner ? route('owner.parkings.edit', $parking) : route('admin.parkings.edit', $parking)); ?>"
                                style="display: inline-block; background: #3a3a5e; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; margin-right: 6px;">
                                 Edit
                             </a>
 
-                            <form method="POST" action="{{ $isOwner ? route('owner.parkings.destroy', $parking) : route('admin.parkings.destroy', $parking) }}"
+                            <form method="POST" action="<?php echo e($isOwner ? route('owner.parkings.destroy', $parking) : route('admin.parkings.destroy', $parking)); ?>"
                                   style="display: inline-block;"
                                   onsubmit="return confirm('Delete this parking?');">
-                                @csrf
-                                @method('DELETE')
+                                <?php echo csrf_field(); ?>
+                                <?php echo method_field('DELETE'); ?>
                                 <button type="submit"
                                         style="background: #771c25; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">
                                     Delete
@@ -107,20 +108,21 @@
                             <button type="button" class="btn btn-sm btn-primary"
                                     data-bs-toggle="modal"
                                     data-bs-target="#spotsModal"
-                                    data-parking-id="{{ $parking->id }}"
-                                    data-parking-name="{{ $parking->name }}">
+                                    data-parking-id="<?php echo e($parking->id); ?>"
+                                    data-parking-name="<?php echo e($parking->name); ?>">
                                 Spots
                             </button>
                         </td>
                     </tr>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
     </div>
 
     <!-- Pagination -->
     <div class="pagination-wrapper mt-4">
-        {{ $parkings->onEachSide(1)->links('pagination::simple-tailwind') }}
+        <?php echo e($parkings->onEachSide(1)->links('pagination::simple-tailwind')); ?>
+
     </div>
 </div>
 
@@ -135,11 +137,11 @@
       </div>
 
       <div class="modal-body">
-        {{-- Add Spot --}}
+        
         <form id="addSpotForm" method="POST"
-              action="{{ $isOwner ? route('owner.spots.store') : route('admin.spots.store') }}"
+              action="<?php echo e($isOwner ? route('owner.spots.store') : route('admin.spots.store')); ?>"
               class="row mb-3">
-          @csrf
+          <?php echo csrf_field(); ?>
           <input type="hidden" name="parking_id" id="spotsParkingId">
 
           <div class="col-md-4 mb-2">
@@ -158,7 +160,7 @@
           </div>
         </form>
 
-        {{-- Spots Table --}}
+        
         <div class="table-responsive">
           <table class="table table-sm align-middle">
             <thead>
@@ -179,9 +181,9 @@
     </div>
   </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const modalEl = document.getElementById('spotsModal');
@@ -193,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   let currentParkingId = null;
 
-  const basePrefix = @json($basePrefix); // "/owner" or "/admin"
+  const basePrefix = <?php echo json_encode($basePrefix, 15, 512) ?>; // "/owner" or "/admin"
 
   async function loadSpots(parkingId){
     spotsBody.innerHTML = `<tr><td colspan="3" class="text-center text-muted">Loading...</td></tr>`;
@@ -332,4 +334,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\DELL\Downloads\Parking-Finder2-stage4-auth-flow\resources\views/admin/parkings/index.blade.php ENDPATH**/ ?>

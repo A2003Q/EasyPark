@@ -383,11 +383,14 @@ button {
 .banner_section {
     width: 100%;
     float: left;
-    background-image: url(https://i.pinimg.com/736x/70/e3/ef/70e3ef1b8c11a4b6fd78e1c3cd1e632c.jpg);
-    height: auto;
-    background-size: 100%;
-    padding: 90px 0px;
+    background-image: url('https://i.pinimg.com/736x/70/e3/ef/70e3ef1b8c11a4b6fd78e1c3cd1e632c.jpg');
+    background-size: cover;          /* أهم تعديل */
+    background-position: center;     /* يوسّط الصورة */
+    background-repeat: no-repeat;
+    min-height: 100vh;               /* هيرو كامل الشاشة */
+    padding: 90px 0;
 }
+
 
 .banner_taital_main {
     width: 100%;
@@ -1683,7 +1686,7 @@ textarea#comment::placeholder {
     width: 100% !important;
     z-index: 99999 !important;
     float: none !important;
-    background: #4f4f7f !important;
+    background: #ffffff !important;
     background-image: none !important;
 }
 .custom_nav-container {

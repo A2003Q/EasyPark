@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ParkEasy | Register</title>
+  <title>ParkEasy | Login</title>
   
   <!-- Enhanced Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" type="text/css" href="{{ asset('landing/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('landing/css/style.css') }}">
+  <link rel="stylesheet" type="text/css" href="<?php echo e(asset('landing/css/bootstrap.min.css')); ?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo e(asset('landing/css/style.css')); ?>">
   
   <style>
   :root {
@@ -49,11 +49,11 @@
   .auth_bg {
     position: fixed;
     inset: 0;
-    background-image: url("{{ asset('landing/images/login-bg.jpg') }}");
+    background-image: url("<?php echo e(asset('landing/images/login-bg.jpg')); ?>");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    transform: scale(1.05);
+    backg,vcround-repeat: no-repeat;
+    \xnm. bb
     filter: blur(3px) brightness(0.85);
     z-index: 0;
   }
@@ -245,8 +245,6 @@
 
   .form-group:nth-child(1) { animation-delay: 0.3s; }
   .form-group:nth-child(2) { animation-delay: 0.4s; }
-  .form-group:nth-child(3) { animation-delay: 0.5s; }
-  .form-group:nth-child(4) { animation-delay: 0.6s; }
 
   @keyframes formItemSlideIn {
     from {
@@ -288,7 +286,84 @@
     transform: translateY(-1px);
   }
 
-  /* Sign up button */
+  /* Remember me & Forgot password */
+  .d-flex {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    margin-bottom: 24px !important;
+    animation: formItemSlideIn 0.5s ease-out 0.5s both;
+  }
+
+  .form-check {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+  }
+
+  .form-check-input {
+    width: 18px;
+    height: 18px;
+    margin-top: 0 !important;
+    border: 2px solid rgba(203, 213, 225, 0.8);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .form-check-input:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .form-check-input:focus {
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+
+  .form-check-label {
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dark);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  a.small {
+    display: inline-block !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  a.small::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  a.small:hover {
+    color: var(--primary);
+  }
+
+  a.small:hover::after {
+    width: 100%;
+  }
+
+  /* Login button */
   .auth_btn {
     height: 52px;
     padding: 14px 32px;
@@ -307,7 +382,7 @@
       var(--shadow-md),
       0 0 20px rgba(58, 58, 94, 0.3);
     transition: all 0.3s ease;
-    animation: formItemSlideIn 0.5s ease-out 0.7s both;
+    animation: formItemSlideIn 0.5s ease-out 0.6s both;
   }
 
   .auth_btn::before {
@@ -340,11 +415,11 @@
     transform: translateY(0);
   }
 
-  /* Login text */
+  /* Sign up text */
   .text-center.mt-3 {
     margin-top: 24px !important;
     font-size: 14px;
-    animation: formItemSlideIn 0.5s ease-out 0.8s both;
+    animation: formItemSlideIn 0.5s ease-out 0.7s both;
   }
 
   .text-center.mt-3 .small:first-child {
@@ -354,41 +429,14 @@
   }
 
   .text-center.mt-3 a.small {
-    display: inline-block !important;
-    white-space: nowrap !important;
-    margin: 0 !important;
-    font-size: 14px;
     font-weight: 700;
-    color: var(--accent);
-    text-decoration: none;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .text-center.mt-3 a.small::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-  }
-
-  .text-center.mt-3 a.small:hover {
-    color: var(--primary);
-  }
-
-  .text-center.mt-3 a.small:hover::after {
-    width: 100%;
   }
 
   /* Back to landing */
   .auth_back {
     margin-top: 28px;
     text-align: center;
-    animation: formItemSlideIn 0.5s ease-out 0.9s both;
+    animation: formItemSlideIn 0.5s ease-out 0.8s both;
   }
 
   .auth_back a {
@@ -425,6 +473,21 @@
     .auth_btn {
       height: 48px;
     }
+
+    .d-flex {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 12px !important;
+    }
+
+    .form-check {
+      width: 100%;
+    }
+
+    a.small {
+      width: 100%;
+      text-align: left;
+    }
   }
 
   @media (max-width: 480px) {
@@ -459,45 +522,37 @@
         <div class="auth_card">
           <div class="auth_brand text-center">
             <a class="nav-link navbar-brand" href="#top">
-              <img src="{{ asset('landing/images/logo2.png') }}" alt="ParkIt Logo" class="nav-logo">
+              <img src="<?php echo e(asset('landing/images/logo2.png')); ?>" alt="ParkIt Logo" class="nav-logo">
             </a>
-            <p class="auth_subtitle">Create your account</p>
+            <p class="auth_subtitle">Sign in to continue</p>
           </div>
 
-          @if ($errors->any())
+          <?php if(session('status')): ?>
+            <div class="alert alert-success" role="alert"><?php echo e(session('status')); ?></div>
+          <?php endif; ?>
+
+          <?php if($errors->any()): ?>
             <div class="alert alert-danger" role="alert">
               <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                @endforeach
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <li><?php echo e($error); ?></li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </ul>
             </div>
-          @endif
+          <?php endif; ?>
 
-          <form method="POST" action="{{ route('register') }}" class="auth_form" novalidate>
-            @csrf
-
-            <div class="form-group">
-              <input
-                type="text"
-                class="form-control"
-                name="name"
-                value="{{ old('name') }}"
-                placeholder="Full name"
-                required
-                autofocus
-                autocomplete="name"
-              >
-            </div>
+          <form method="POST" action="<?php echo e(route('login')); ?>" class="auth_form" novalidate>
+            <?php echo csrf_field(); ?>
 
             <div class="form-group">
               <input
                 type="email"
                 class="form-control"
                 name="email"
-                value="{{ old('email') }}"
+                value="<?php echo e(old('email')); ?>"
                 placeholder="Email"
                 required
+                autofocus
                 autocomplete="username"
               >
             </div>
@@ -509,38 +564,38 @@
                 name="password"
                 placeholder="Password"
                 required
-                autocomplete="new-password"
+                autocomplete="current-password"
               >
             </div>
 
-            <div class="form-group">
-              <input
-                type="password"
-                class="form-control"
-                name="password_confirmation"
-                placeholder="Confirm password"
-                required
-                autocomplete="new-password"
-              >
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="remember" id="remember_me">
+                <label class="form-check-label" for="remember_me">Remember me</label>
+              </div>
+
+              <?php if(Route::has('password.request')): ?>
+                <a class="small" href="<?php echo e(route('password.request')); ?>">Forgot password?</a>
+              <?php endif; ?>
             </div>
 
-            <button type="submit" class="btn auth_btn w-100">Sign up</button>
+            <button type="submit" class="btn auth_btn w-100">Login</button>
 
             <div class="text-center mt-3">
-              <span class="small">Already have an account?</span>
-              <a class="small" href="{{ route('login') }}">Login</a>
+              <span class="small">Don't have an account?</span>
+              <a class="small" href="<?php echo e(route('register')); ?>">Sign up</a>
             </div>
           </form>
 
           <div class="auth_back">
-            <a href="{{ route('home') }}#top">&larr; Back to Landing</a>
+            <a href="<?php echo e(route('home')); ?>">&larr; Back to Landing</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="{{ asset('landing/js/jquery.min.js') }}"></script>
-  <script src="{{ asset('landing/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="<?php echo e(asset('landing/js/jquery.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('landing/js/bootstrap.bundle.min.js')); ?>"></script>
 </body>
-</html>
+</html><?php /**PATH C:\Users\DELL\Downloads\Parking-Finder2-stage4-auth-flow\resources\views/auth/login.blade.php ENDPATH**/ ?>

@@ -1,73 +1,71 @@
-@extends('admin.layout')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container-fluid">
     <h3 class="text-center mt-4 mb-5">
-        Welcome, {{ auth()->user()->name }}!
+        Welcome, <?php echo e(auth()->user()->name); ?>!
     </h3>
 
     <!-- Dashboard Cards -->
     <div class="dashboard-row">
 
         <!-- Users -->
-       @if(auth()->user()->role === 'admin')
-           <a href="{{ route('admin.users.index') }}" class="text-decoration-none">
+       <?php if(auth()->user()->role === 'admin'): ?>
+           <a href="<?php echo e(route('admin.users.index')); ?>" class="text-decoration-none">
            <div class="dashboard-card">
            <i class="fa fa-users"></i>
           <h4>Users</h4>
-          <p>{{ $usersCount }}</p>
+          <p><?php echo e($usersCount); ?></p>
        </div>
     </a>
-@endif
+<?php endif; ?>
 
         <!-- Active Subscriptions -->
-        @if(auth()->user()->role === 'admin')
-        <a href="{{ route('admin.subscriptions.index') }}" class="text-decoration-none">
+        <?php if(auth()->user()->role === 'admin'): ?>
+        <a href="<?php echo e(route('admin.subscriptions.index')); ?>" class="text-decoration-none">
             <div class="dashboard-card">
                 <i class="fa fa-id-card"></i>
                 <h4>Active Subscriptions</h4>
-                <p>{{ $activeSubscriptions }}</p>
+                <p><?php echo e($activeSubscriptions); ?></p>
             </div>
         </a>
-        @endif
+        <?php endif; ?>
 
         <!-- Parkings -->
         
-        <a href="{{ auth()->user()->role === 'owner' ? route('owner.parkings.index') : route('admin.parkings.index') }}" class="text-decoration-none">
+        <a href="<?php echo e(auth()->user()->role === 'owner' ? route('owner.parkings.index') : route('admin.parkings.index')); ?>" class="text-decoration-none">
 
             <div class="dashboard-card">
                 <i class="fa fa-parking"></i>
                 <h4>Parkings</h4>
-                <p>{{ $parkingsCount }}</p>
+                <p><?php echo e($parkingsCount); ?></p>
             </div>
         </a>
 
         <!-- Active Reservations -->
-        <a href="{{ auth()->user()->role === 'owner' ? route('owner.reservations.index') : route('admin.reservations.index') }}" class="text-decoration-none">
+        <a href="<?php echo e(auth()->user()->role === 'owner' ? route('owner.reservations.index') : route('admin.reservations.index')); ?>" class="text-decoration-none">
             <div class="dashboard-card">
                 <i class="fa fa-calendar-check"></i>
                 <h4>Active Reservations</h4>
-                <p>{{ $activeReservations }}</p>
+                <p><?php echo e($activeReservations); ?></p>
             </div>
         </a>
 
         <!-- Monthly Revenue -->
-        @if(auth()->user()->role === 'admin')
+        <?php if(auth()->user()->role === 'admin'): ?>
         <div class="dashboard-card">
             <i class="fa fa-chart-line"></i>
             <h4>Monthly Revenue</h4>
-            <p>{{ $monthlyRevenue }} JD</p>
+            <p><?php echo e($monthlyRevenue); ?> JD</p>
         </div>
-        @endif
+        <?php endif; ?>
 
         <!-- Total Revenue -->
-        @if(auth()->user()->role === 'admin')
+        <?php if(auth()->user()->role === 'admin'): ?>
         <div class="dashboard-card">
             <i class="fa fa-dollar-sign"></i>
             <h4>Total Revenue</h4>
-            <p>{{ $totalRevenue }} JD</p>
+            <p><?php echo e($totalRevenue); ?> JD</p>
         </div>
-        @endif
+        <?php endif; ?>
     </div>
 
     <!-- Charts Section -->
@@ -91,7 +89,7 @@
                 </div>
             </div>
             <!-- Monthly Revenue Chart (Large Top) -->
-            @if(auth()->user()->role === 'admin')
+            <?php if(auth()->user()->role === 'admin'): ?>
             <div class="col-lg-12">
                 <div class="chart-card">
                     <h5 class="chart-title">Monthly Revenue</h5>
@@ -99,16 +97,16 @@
                 </div>
                 
             </div>
-            @endif
+            <?php endif; ?>
 
         
 
         </div>
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -116,7 +114,7 @@
     /* ----------------------------- */
 /* Reservations Status Chart     */
 /* ----------------------------- */
-const reservationsData = @json($reservationStatusCounts); // e.g. ['Active'=>40,'Completed'=>25,'Cancelled'=>10]
+const reservationsData = <?php echo json_encode($reservationStatusCounts, 15, 512) ?>; // e.g. ['Active'=>40,'Completed'=>25,'Cancelled'=>10]
 new Chart(document.getElementById('reservationsChart'), {
     type: 'doughnut',
     data: {
@@ -137,7 +135,7 @@ new Chart(document.getElementById('reservationsChart'), {
 /* ----------------------------- */
 /* Parking Availability Chart    */
 /* ----------------------------- */
-const parkingData = @json($parkingAvailability); // e.g. ['Available'=>120,'Occupied'=>80]
+const parkingData = <?php echo json_encode($parkingAvailability, 15, 512) ?>; // e.g. ['Available'=>120,'Occupied'=>80]
 new Chart(document.getElementById('parkingChart'), {
     type: 'bar',
     data: {
@@ -158,7 +156,7 @@ new Chart(document.getElementById('parkingChart'), {
 /* ----------------------------- */
 /* Monthly Revenue Chart (Line)  */
 /* ----------------------------- */
-const revenueData = @json($monthlyRevenueByMonth); // e.g. ['Jan' => 1200, 'Feb'=>1500 ...]
+const revenueData = <?php echo json_encode($monthlyRevenueByMonth, 15, 512) ?>; // e.g. ['Jan' => 1200, 'Feb'=>1500 ...]
 new Chart(document.getElementById('revenueChart'), {
     type: 'line',
     data: {
@@ -185,7 +183,7 @@ new Chart(document.getElementById('revenueChart'), {
 
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
@@ -194,3 +192,5 @@ new Chart(document.getElementById('revenueChart'), {
 
 
 
+
+<?php echo $__env->make('admin.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\DELL\Downloads\Parking-Finder2-stage4-auth-flow\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>

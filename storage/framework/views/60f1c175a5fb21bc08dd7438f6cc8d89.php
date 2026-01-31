@@ -218,22 +218,24 @@
       opacity: 1;
     }
 
-    .parking-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
+ .parking-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* ✅ تملأ الديف كامل */
+    object-position: center; /* ✅ تتمركز بالوسط */
+}
+
 
     .pe-card:hover .parking-image {
       transform: scale(1.1);
     }
 
     .image-wrapper {
-      overflow: hidden;
-      position: relative;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    }
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    height: 100%;  /* ✅ مهم: يأخذ كامل ارتفاع الـ row */
+}
 
     .card-content {
       padding: 24px;

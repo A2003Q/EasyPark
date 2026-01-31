@@ -105,7 +105,7 @@
                   <div class="about_img"><img src="https://i.pinimg.com/736x/ba/e8/d7/bae8d7ba0e67bac95880925c0086fa08.jpg" loading="lazy" referrerpolicy="no-referrer"></div>
                </div>
                <div class="col-md-6">
-                  <h3 class="about_taital">About ParkEasy</h3>
+                  <h3 class="about_taital">About ParkIt</h3>
                     <p class="about_text">ParkEasy helps drivers find available outdoor parking spots quickly. It highlights nearby parking areas, shows spot availability, and supports a modern smart-city experience for both users and operators.</p>
                     <div class="readmore_btn"><a href="#">Learn More<span class="arrow_icon"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></span></a></div>
                </div>

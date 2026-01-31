@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" type="text/css" href="{{ asset('landing/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('landing/css/style.css') }}">
+  <link rel="stylesheet" type="text/css" href="<?php echo e(asset('landing/css/bootstrap.min.css')); ?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo e(asset('landing/css/style.css')); ?>">
   
   <style>
   :root {
@@ -49,7 +49,7 @@
   .auth_bg {
     position: fixed;
     inset: 0;
-    background-image: url("{{ asset('landing/images/login-bg.jpg') }}");
+    background-image: url("<?php echo e(asset('landing/images/login-bg.jpg')); ?>");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -459,30 +459,30 @@
         <div class="auth_card">
           <div class="auth_brand text-center">
             <a class="nav-link navbar-brand" href="#top">
-              <img src="{{ asset('landing/images/logo2.png') }}" alt="ParkIt Logo" class="nav-logo">
+              <img src="<?php echo e(asset('landing/images/logo2.png')); ?>" alt="ParkIt Logo" class="nav-logo">
             </a>
             <p class="auth_subtitle">Create your account</p>
           </div>
 
-          @if ($errors->any())
+          <?php if($errors->any()): ?>
             <div class="alert alert-danger" role="alert">
               <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                @endforeach
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                  <li><?php echo e($error); ?></li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </ul>
             </div>
-          @endif
+          <?php endif; ?>
 
-          <form method="POST" action="{{ route('register') }}" class="auth_form" novalidate>
-            @csrf
+          <form method="POST" action="<?php echo e(route('register')); ?>" class="auth_form" novalidate>
+            <?php echo csrf_field(); ?>
 
             <div class="form-group">
               <input
                 type="text"
                 class="form-control"
                 name="name"
-                value="{{ old('name') }}"
+                value="<?php echo e(old('name')); ?>"
                 placeholder="Full name"
                 required
                 autofocus
@@ -495,7 +495,7 @@
                 type="email"
                 class="form-control"
                 name="email"
-                value="{{ old('email') }}"
+                value="<?php echo e(old('email')); ?>"
                 placeholder="Email"
                 required
                 autocomplete="username"
@@ -528,19 +528,19 @@
 
             <div class="text-center mt-3">
               <span class="small">Already have an account?</span>
-              <a class="small" href="{{ route('login') }}">Login</a>
+              <a class="small" href="<?php echo e(route('login')); ?>">Login</a>
             </div>
           </form>
 
           <div class="auth_back">
-            <a href="{{ route('home') }}#top">&larr; Back to Landing</a>
+            <a href="<?php echo e(route('home')); ?>#top">&larr; Back to Landing</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="{{ asset('landing/js/jquery.min.js') }}"></script>
-  <script src="{{ asset('landing/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="<?php echo e(asset('landing/js/jquery.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('landing/js/bootstrap.bundle.min.js')); ?>"></script>
 </body>
-</html>
+</html><?php /**PATH C:\Users\DELL\Downloads\Parking-Finder2-stage4-auth-flow\resources\views/auth/register.blade.php ENDPATH**/ ?>

@@ -1,6 +1,10 @@
 @extends('admin.layout')
 
 @section('content')
+@php
+    $isOwner = strtolower(auth()->user()->role ?? '') === 'owner';
+@endphp
+
 <div class="admin-page">
     <div class="page-header">
         <h2 class="text-center mb-4">Edit Parking</h2>
@@ -17,7 +21,7 @@
     @endif
 
     <div class="card admin-card" style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); padding: 30px;">
-        <form method="POST" action="{{ route('admin.parkings.update', $parking) }}">
+        <form method="POST" action="{{ $isOwner ? route('owner.parkings.update', $parking) : route('admin.parkings.update', $parking) }}">
             @csrf
             @method('PUT')
 

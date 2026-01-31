@@ -18,6 +18,11 @@ use App\Http\Controllers\User\ReservationFrontController;
 use App\Http\Controllers\User\SubscriptionFrontController;
 use App\Http\Controllers\User\UserProfileController;
 
+//Owner controllers
+use App\Http\Controllers\Owner\DashboardController as OwnerDashboardController;
+use App\Http\Controllers\Owner\ParkingController as OwnerParkingController;
+use App\Http\Controllers\Owner\ReservationController as OwnerReservationController;
+
 /*
 |--------------------------------------------------------------------------
 | Public
@@ -107,6 +112,30 @@ Route::middleware(['auth', 'admin'])
     ->name('spots.index');
 
 
+    });
+/*
+|--------------------------------------------------------------------------
+| Owner (ONLY owner)
+|--------------------------------------------------------------------------
+*/
+
+    Route::middleware(['auth','owner'])
+    ->prefix('owner')
+    ->name('owner.')
+    ->group(function () {
+        Route::get('/dashboard', [OwnerDashboardController::class, 'index'])->name('dashboard');
+
+        Route::resource('parkings', OwnerParkingController::class);
+        Route::get('/reservations', [OwnerReservationController::class, 'index'])->name('reservations.index');
+        Route::get('/revenue', [\App\Http\Controllers\Owner\RevenueController::class, 'index'])->name('revenue.index');
+       
+        Route::post('/spots', [\App\Http\Controllers\Owner\SpotController::class,'store'])->name('spots.store');
+        Route::patch('/spots/{spot}', [\App\Http\Controllers\Owner\SpotController::class,'update'])->name('spots.update');
+        Route::delete('/spots/{spot}', [\App\Http\Controllers\Owner\SpotController::class,'destroy'])->name('spots.destroy');
+       Route::get('/parkings/{parking}/spots', [\App\Http\Controllers\Owner\SpotController::class,'list'])
+    ->name('parkings.spots.list');
+
+        
     });
 
 require __DIR__.'/auth.php';
